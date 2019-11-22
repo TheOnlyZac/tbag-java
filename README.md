@@ -1,3 +1,3 @@
 # Text Based Adventure Game (TBAG)
-## A text-based game engine written in Java
+A text-based game engine written in Java
 
