@@ -6,11 +6,14 @@ class Tbag {
         Scanner input = new Scanner(System.in);
 
         BaseObject debugSword = new BaseObject("Debug Sword");
-        System.out.println("Initialized sword as '" + debugSword.name + "'");
+        Console.log("Initialized object as '" + debugSword.name + "'");
 
         while(true) {
             String txt = input.nextLine();
-            System.out.println(txt);
+            Console.log(txt);
+            if (txt == "exit") break;
         }
+
+        input.close();
     }
 }
