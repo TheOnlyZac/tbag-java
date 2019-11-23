@@ -1,6 +1,10 @@
 import java.util.Scanner;
 
 class Tbag {
+    /**
+     * Main game class, handles user input and logic
+     */
+
     public static void main(String[] args)
     {
         Console.debugEnabled = true;
