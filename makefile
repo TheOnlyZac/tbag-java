@@ -7,6 +7,8 @@ JC = javac
 CLASSES = \
 	Console.java \
 	BaseObject.java \
+	Actor.java \
+	Room.java \
 	Tbag.java
 
 default: classes

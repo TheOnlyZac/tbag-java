@@ -11,7 +11,7 @@ class Tbag {
         Scanner input = new Scanner(System.in);
 
         BaseObject debugSword = new BaseObject("Debug Sword");
-        Console.debug("Initialized object as '" + debugSword.name + "'");
+        Console.debug("Initialized object as '" + debugSword.getName() + "'");
 
         while(true) {
             String txt = input.nextLine();
