@@ -16,9 +16,17 @@ class Tbag {
         while(true) {
             String txt = input.nextLine();
             Console.log(txt);
-            if (txt == "exit") break;
+            if (parseInput(txt) == -1) break;
         }
 
         input.close();
+    }
+
+    private static int parseInput(String text)
+    {
+        String[] words = text.split(" ");
+        if (words[0].equals("exit")) return -1;
+        return 0;
+
     }
 }

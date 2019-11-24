@@ -55,6 +55,6 @@ final class Console {
          * 
          * @param text  The message to be displayed
          */
-        if (debugEnabled) Console.print(">>" + timestamp() + ": " + text);
+        if (debugEnabled) Console.print(">>" + timestamp() + " " + text);
     }
 }

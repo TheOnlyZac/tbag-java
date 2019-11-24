@@ -4,6 +4,7 @@ class BaseObject {
      */
 
     private String name;
+    private Room location;
 
     public String getName()
     {
@@ -25,4 +26,12 @@ class BaseObject {
          */
         this.name = name;
     }
+
+    public void moveTo(Room room)
+    {
+        this.location.removeObject(this);
+        room.addObject(this);
+        this.location = room;
+    }
+    
 }
