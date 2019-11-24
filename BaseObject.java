@@ -19,8 +19,7 @@ class BaseObject {
 	public BaseObject(String name)
 	{
 		/**
-		 * Initialize a new BaseObject. Should never be used directly, only 
-		 * derived from.
+		 * Initialize a new BaseObject with no special properties.
 		 * 
 		 * @param name  The name of the object
 		 */
@@ -29,6 +28,12 @@ class BaseObject {
 
 	public void moveTo(Room room)
 	{
+		/**
+		 * Removes the object from its current room and adds it to the given
+		 * room.
+		 * 
+		 * @param room 	Destination room
+		 */
 		this.location.removeObject(this);
 		room.addObject(this);
 		this.location = room;

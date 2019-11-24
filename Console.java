@@ -1,5 +1,6 @@
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.Scanner;
 
 final class Console {
 	/**
@@ -56,5 +57,12 @@ final class Console {
 		 * @param text  The message to be displayed
 		 */
 		if (debugEnabled) Console.print(">>" + timestamp() + " " + text);
+	}
+
+	public static String input()
+	{
+		Scanner scanner = new Scanner(System.in);
+		String text = scanner.nextLine();
+		return text;
 	}
 }
