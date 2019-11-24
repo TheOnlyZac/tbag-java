@@ -50,15 +50,15 @@ final class Console {
 		}
 	}
 
-	public static void say(Object speaker, String text)
+	public static void say(String speaker, String text)
 	{
 		/**
 		 * Displays the text as a line of dialogue spoken by the speaker
 		 * 
-		 * @param speaker 	The thing doing the speaking
+		 * @param speaker 	The name of the thing doing the speaking
 		 * @param text 		The message to be spoken
 		 */
-		Console.log(String.format("%s says \"%s\"", speaker.toString(), text));
+		Console.log(String.format("%s says \"%s\"", speaker, text));
 	}
 
 	public static void debug(String text)

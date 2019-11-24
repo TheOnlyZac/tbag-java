@@ -57,4 +57,14 @@ class BaseObject {
 		newLocation.addObject(this);
 		this.location = newLocation;
 	}
+
+	public void say(String msg)
+	{
+		/**
+		 * Makes the object say the given message as dialogue
+		 * 
+		 * @param msg 	Message to be spoken
+		 */
+		Console.say(this.name, msg);
+	}
 }
