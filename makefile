@@ -5,6 +5,7 @@ JC = javac
 	$(JC) $(JFLAGS) $*.java
 
 CLASSES = \
+	Format.java \
 	Console.java \
 	BaseObject.java \
 	Actor.java \

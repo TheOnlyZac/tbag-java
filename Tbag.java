@@ -12,18 +12,24 @@ class Tbag {
 		}
 
 		// Create a new Lobby room
-		Room lobby = new Room("Lobby");
+		Room lobby = new Room("the lobby", "a waiting room with beige walls");
 
 		// Create Debug Sword test object
 		BaseObject debugSword = new BaseObject("Debug Sword",
 			"a mysterious sword made of light");
 		Console.debug("Initialized debugSword as: " + debugSword.toString());
 
+		// Create character test obbject
+		Actor testActor = new Actor("Alcyonis");
+		Console.debug("Initialized debugActor as " + testActor.toString());
+
 		// Move the Debug Sword into the Lobby
 		debugSword.moveTo(lobby);
-		Console.debug(debugSword.toString());
+		testActor.moveTo(lobby);
 
-		debugSword.say("It's dangerous to go alone. Take me!");
+		testActor.say("It's dangerous to go alone. Take this!");
+		Console.log(String.format("%s gestures to %s on the table",
+			testActor.getName(), Format.a("glowing sword")));
 
 		while(true) {
 			String txt = Console.input();

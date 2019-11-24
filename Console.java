@@ -20,6 +20,16 @@ final class Console {
 		debug("Debug mode enabled");
 	}
 
+	public static String input()
+	{
+		/**
+		 * Promps the user for input and returns the full line written
+		 */
+		Scanner scanner = new Scanner(System.in);
+		String text = scanner.nextLine();
+		return text;
+	}
+
 	private static String timestamp()
 	{
 		/**
@@ -73,16 +83,5 @@ final class Console {
 		for (String s : text.split("\n")) {
 			Console.print(">>" + timestamp() + " " + s);
 		}
-
-	}
-
-	public static String input()
-	{
-		/**
-		 * Promps the user for input and returns the full line written
-		 */
-		Scanner scanner = new Scanner(System.in);
-		String text = scanner.nextLine();
-		return text;
 	}
 }
