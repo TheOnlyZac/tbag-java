@@ -7,14 +7,17 @@ class Tbag {
 	{
 		Console.debugEnabled = true;
 
-		BaseObject debugSword = new BaseObject("Debug Sword");
-		Console.debug("Initialized object as '" + debugSword.getName() + "'");
+		BaseObject debugSword = new BaseObject("Debug Sword",
+			"a mysterious sword made of light");
+		Console.debug("Initialized debugSword as " + debugSword.toString());
 
 		while(true) {
 			String txt = Console.input();
 			Console.log(txt);
 			if (parseInput(txt) == -1) break;
 		}
+
+		Console.debug("Thank you for playing Wing Commander!");
 	}
 
 	private static int parseInput(String text)
