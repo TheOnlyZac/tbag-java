@@ -5,11 +5,20 @@ class Tbag {
 
 	public static void main(String[] args)
 	{
-		Console.debugEnabled = true;
+		if (args.length > 0 && args[0].equals("-d")) {
+			Console.debugEnabled = true;
+			Console.debug("Starting with debug mode enabled");
+		}
+
+		Room lobby = new Room("Lobby");
 
 		BaseObject debugSword = new BaseObject("Debug Sword",
 			"a mysterious sword made of light");
-		Console.debug("Initialized debugSword as " + debugSword.toString());
+		Console.debug("Initialized debugSword as: " + debugSword.toString());
+
+		debugSword.moveTo(lobby);
+
+		Console.debug(debugSword.toString());
 
 		while(true) {
 			String txt = Console.input();
@@ -17,7 +26,7 @@ class Tbag {
 			if (parseInput(txt) == -1) break;
 		}
 
-		Console.debug("Thank you for playing Wing Commander!");
+		Console.log("Thank you for playing Wing Commander!");
 	}
 
 	private static int parseInput(String text)

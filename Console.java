@@ -41,11 +41,24 @@ final class Console {
 	public static void log(String text)
 	{
 		/**
-		 * Formats a string and displays it in the message log.
+		 * Formats a string and displays it in the message log, line by line
 		 * 
 		 * @param text  The text to be displayed
 		 */
-		Console.print(">" + text);
+		for (String s : text.split("\n")) {
+			Console.print(">" + s);
+		}
+	}
+
+	public static void say(Object speaker, String text)
+	{
+		/**
+		 * Displays the text as a line of dialogue spoken by the speaker
+		 * 
+		 * @param speaker 	The thing doing the speaking
+		 * @param text 		The message to be spoken
+		 */
+		Console.log(String.format("%s says \"%s\"", speaker.toString(), text));
 	}
 
 	public static void debug(String text)
@@ -56,11 +69,18 @@ final class Console {
 		 * 
 		 * @param text  The message to be displayed
 		 */
-		if (debugEnabled) Console.print(">>" + timestamp() + " " + text);
+		if (!debugEnabled) return;
+		for (String s : text.split("\n")) {
+			Console.print(">>" + timestamp() + " " + s);
+		}
+
 	}
 
 	public static String input()
 	{
+		/**
+		 * Promps the user for input and returns the full line written
+		 */
 		Scanner scanner = new Scanner(System.in);
 		String text = scanner.nextLine();
 		return text;

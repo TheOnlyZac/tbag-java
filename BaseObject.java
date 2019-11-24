@@ -5,34 +5,22 @@ class BaseObject {
 
 	private String name;
 	private String description;
-	private Room location;
+	private Room location = Room.purgatory;
 
-	public String getName()
-	{
-		return name;
-	}
+	public String getName() { return name; }
+	public void setName(String name) { this.name = name; }
 
-	public void setName(String name)
-	{
-		this.name = name;
-	}
+	public String getDescription() { return description; }
+	public void setDescription(String desc) { this.description = desc; }
 
-	public String getDescription()
-	{
-		return description;
-	}
-
-	public void setDescription(String desc)
-	{
-		this.description = desc;
-	}
+	public Room getLocation() { return location; }
 
 	public BaseObject(String name, String desc)
 	{
 		/**
 		 * Initialize a new BaseObject with the given name and description
 		 * 
-		 * @param name  The name of the object
+		 * @param name 	The name of the object
 		 * @param desc 	A brief description of the object
 		 */
 		this.name = name;
@@ -48,25 +36,25 @@ class BaseObject {
 		 * @param name  The name of the object
 		 */
 		this.name = name;
-		this.description = "a " + this.getClass() + " called '" + this.name + "'";
+		this.description = "a " + this.getClass();
 	}
 
 	public String toString()
 	{
-		return this.name + " (" + this.description + ")";
+		return String.format("%s (%s) in %s",
+			this.name, this.description, this.location.getName());
 	}
 
-	public void moveTo(Room room)
+	public void moveTo(Room newLocation)
 	{
 		/**
-		 * Removes the object from its current room and adds it to the given
-		 * room.
+		 * Removes the object from its current Room and adds it to the 
+		 * given Room.
 		 * 
 		 * @param room 	Destination room
 		 */
 		this.location.removeObject(this);
-		room.addObject(this);
-		this.location = room;
+		newLocation.addObject(this);
+		this.location = newLocation;
 	}
-	
 }
