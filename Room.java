@@ -56,7 +56,7 @@ class Room {
 			return;
 		}
 		this.contents.add(obj);
-		Console.debug("Successfully added to room");
+		//Console.debug("Successfully added to room");
 	}
 
 	public void removeObject(BaseObject obj)
@@ -73,6 +73,6 @@ class Room {
 			return;
 		}
 		this.contents.remove(obj);
-		Console.debug("Successfully removed from Room");
+		//Console.debug("Successfully removed from Room");
 	}
 }
