@@ -12,7 +12,7 @@ MAINCLASS = Tbag
 .java.class:
 	$(JC) $(CFLAGS) $*.java
 
-# Java files
+# Make class files from java files
 CLASSES = Format.java Console.java BaseObject.java \
 	Item.java Actor.java Room.java Tbag.java
 
@@ -20,12 +20,19 @@ default: classes
 
 classes: $(CLASSES:.java=.class)
 
+# Make manifest file for JAR with main-class manifest
 manifest:
 	echo Main-Class: $(MAINCLASS) >> Manifest.txt
 
-jar: clean classes manifest
+# Build jar file from classes with manifest
+jar: classes manifest
+	$(RM) *.jar
 	$(JAR) $(JFLAGS) Manifest.txt $(CLASSES:.java=.class)
 
+gui:
+	$(JC) $(CFLAGS) Gui.java
+
+# Clean up compiled files from the directory
 clean:
 	$(RM) *.class
 	$(RM) *.jar
