@@ -1,6 +1,7 @@
+import java.util.Iterator;
 import java.util.ArrayList;
 
-class Room {
+public class Room implements Iterable<BaseObject> {
 	/**
 	 * A Room is the context for which Actors can interact with Objects
 	 */
@@ -9,38 +10,42 @@ class Room {
 	private String description;
 	private ArrayList<BaseObject> contents;
 
-	public String getName() { return name; }
-	public void setName(String name) { this.name = name; }
+	public String getName()
+	{
+		return name;
+	}
+	public void setName(String name)
+	{
+		this.name = name;
+	}
 
-	public String getDescription() { return description; }
-	public void setDescription(String desc) { this.description = desc; }
+	public String getDescription()
+	{
+		return description;
+	}
+	public void setDescription(String desc)
+	{
+		this.description = desc;
+	}
 
-	public static Room purgatory = new Room("Purgatory");
-
-	public Room(String name, String desc)
+	public static Room purgatory = new Room("Purgatory", "a space that exists nowehre");
+	
+	public Iterator<BaseObject> iterator()
+	{
+		return this.contents.iterator();
+	}
+	
+	public Room(String _name, String _desc)
 	{
 		/**
 		 * Initialize a new, empty room with the given name and description
 		 * 
 		 * @param name 	The name of the new room
 		 */
-		this.name = name;
-		this.description = desc;
+		this.name = _name;
+		this.description = _desc;
 		this.contents = new ArrayList<BaseObject>();
 	 }
-
-	 public Room(String name)
-	 {
-		 /**
-		  * Initialize a new, empty room with the given name and a generic 
-		  * description
-		  * 
-		  * @param name 	The name of the new room
-		  */
-		 this.name = name;
-		 this.description = "a room";
-		 this.contents = new ArrayList<BaseObject>();
-	  }
 
 	public void addObject(BaseObject obj)
 	{

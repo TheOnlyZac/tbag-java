@@ -10,6 +10,7 @@ class Tbag {
 			Console.debugEnabled = true;
 			Console.debug("Starting with debug mode enabled");
 		}
+		Console.debugEnabled = true; // hardcode debugMode enabled
 
 		// Create a new Lobby room
 		Room lobby = new Room("the lobby", "a waiting room with beige walls");
@@ -19,7 +20,7 @@ class Tbag {
 			"a mysterious sword made of light");
 		Console.debug("Initialized debugSword as: " + debugSword.toString());
 
-		// Create character test obbject
+		// Create character test object
 		Actor debugActor = new Actor("Alcyonis", "a night elf");
 		Console.debug("Initialized debugActor as " + debugActor.toString());
 
