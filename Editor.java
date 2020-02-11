@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-class Gui {
+class Editor {
 	
 	public static void main(String args[])
 	{

@@ -29,8 +29,8 @@ jar: classes manifest
 	$(RM) *.jar
 	$(JAR) $(JFLAGS) Manifest.txt $(CLASSES:.java=.class)
 
-gui:
-	$(JC) $(CFLAGS) Gui.java
+editor:
+	$(JC) $(CFLAGS) Editor.java
 
 # Clean up compiled files from the directory
 clean:
