@@ -1,9 +1,16 @@
 import javax.swing.*;
+import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class Editor extends JFrame {
+	
+	private JMenuBar menuBar;
+	private JTree tree;
+	
+	private ArrayList<Room> rooms;
 	
 	public Editor()
 	{
@@ -12,16 +19,14 @@ public class Editor extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(600, 600);
 		
-		CreateMenuBar();
-
-		// Room tree list	
-		Room testRoom = new Room("RoomyRoom", "A test room to store objects");		
-		testRoom.addObject(new BaseObject("Tomato", "a big 'ol ripe tomato"));
+		rooms = new ArrayList<Room>();
 		
+		CreateMenuBar();
+		CreateRoomTree();		
 
 		// Populate and draw frame
 		JPanel cardsPanel = new JPanel(new CardLayout());
-		//cardsPanel.add(/*todo*/);
+		cardsPanel.add(tree);
 		this.getContentPane().add(cardsPanel);
 		
 		this.setVisible(true);
@@ -44,7 +49,7 @@ public class Editor extends JFrame {
 		 * Create the menubar on the editor window
 		 */
 		
-		JMenuBar menuBar = new JMenuBar();
+		menuBar = new JMenuBar();
 
 		// File Menu
 		JMenu fileMenu = new JMenu("File");
@@ -89,5 +94,45 @@ public class Editor extends JFrame {
 		int w = 300;
 
 		JOptionPane.showMessageDialog(null, String.format(html, w, w));
+	}
+	
+	private void CreateRoomTree()
+	{
+		// Create room tree list	
+		Room alpha = new Room("Room Alpha", "The first of two test rooms");		
+		alpha.addObject(new BaseObject("Tomato", "a big 'ol ripe tomato"));
+		
+		Room bravo = new Room("Room Bravo", "The second of two test rooms");		
+		bravo.addObject(new BaseObject("Orange", "a sweet 'ol fresh orange"));
+		
+		rooms.add(alpha);
+		rooms.add(bravo);
+		
+		// create root node
+		DefaultMutableTreeNode root = new DefaultMutableTreeNode("Rooms");
+		
+		// refresh rooms
+		RefreshRoomTree(root);
+		
+		// create tree by passing in root node
+		tree = new JTree(root);
+		add(tree);
+	}
+	
+	private void RefreshRoomTree(DefaultMutableTreeNode root)
+	{
+		for (Room room : rooms)
+		{
+			// create a node for each Room in the rooms list
+			DefaultMutableTreeNode rNode = new DefaultMutableTreeNode(room.getName());
+			root.add(rNode);
+			
+			// create a subnode under that room for each object in the room
+			for (BaseObject obj : room)
+			{
+				DefaultMutableTreeNode objNode = new DefaultMutableTreeNode(obj.getName());
+				rNode.add(objNode);
+			}
+		}
 	}
 }
