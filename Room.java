@@ -47,6 +47,11 @@ public class Room implements Iterable<BaseObject> {
 		this.contents = new ArrayList<BaseObject>();
 	 }
 
+	public String toString()
+	{
+		return String.format("Room: %s", this.name);
+	}
+
 	public void addObject(BaseObject obj)
 	{
 		/**

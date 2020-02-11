@@ -3,35 +3,42 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-class Editor {
+public class Editor extends JFrame {
 	
-	private static JFrame frame;
+	public Editor()
+	{
+		// Create JFrame
+		this.setTitle("TBAG Editor");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setSize(600, 600);
+		
+		CreateMenuBar();
+
+		// Room tree list	
+		Room testRoom = new Room("RoomyRoom", "A test room to store objects");		
+		testRoom.addObject(new BaseObject("Tomato", "a big 'ol ripe tomato"));
+		
+
+		// Populate and draw frame
+		JPanel cardsPanel = new JPanel(new CardLayout());
+		//cardsPanel.add(/*todo*/);
+		this.getContentPane().add(cardsPanel);
+		
+		this.setVisible(true);
+	}
 	
 	public static void main(String args[])
 	{
-
-		// Create JFrame
-		frame = new JFrame("TBAG GUI");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(600, 600);
-
-		CreateMenuBar();
-
-		// Item list
-		DefaultListModel<BaseObject> objListModel = new DefaultListModel<BaseObject>();
-		JList<BaseObject> objList = new JList<BaseObject>(objListModel);
-		objListModel.addElement(new BaseObject("Test Object", "A test object"));
-		objListModel.addElement(new Item("Test Item", "A fun item"));
-
-
-		JPanel cardsPanel = new JPanel(new CardLayout());
-		cardsPanel.add(objList);
-		frame.getContentPane().add(cardsPanel);
-
-		frame.setVisible(true);
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run()
+			{
+				new Editor();
+			}
+		});
 	}
 	
-	static void CreateMenuBar()
+	private void CreateMenuBar()
 	{
 		/**
 		 * Create the menubar on the editor window
@@ -71,7 +78,7 @@ class Editor {
 		menuBar.add(helpMenu);
 
 		// Add elements to main JFrame and set visibility
-		frame.getContentPane().add(BorderLayout.NORTH, menuBar);
+		this.getContentPane().add(BorderLayout.NORTH, menuBar);
 	}
 
 	static void AboutPopup()
