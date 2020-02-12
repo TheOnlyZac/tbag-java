@@ -16,9 +16,13 @@ public class Editor extends JFrame {
 	
 	private Game game;
 	
+	private JSplitPane leftPane;
+	private JSplitPane rightPane;
+	
 	private JMenuBar menuBar;
 	private JTree tree;
 	private Inspector inspector;
+	private JPanel explorer;
 	
 	// Editor class constructor
 	public Editor()
@@ -26,14 +30,21 @@ public class Editor extends JFrame {
 		// Create JFrame
 		this.setTitle("TBAG Editor");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(600, 600);
+		this.setSize(800, 600);
 		
 		game = new Game();
 		
 		BuildMenuBar();
 		BuildStoryTree();
 		BuildInspector();
-		
+		BuildExplorer();
+
+		rightPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
+				explorer, inspector);
+		leftPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
+				tree, rightPane);
+
+		this.getContentPane().add(leftPane);
 		this.setVisible(true);
 	}
 	
@@ -55,10 +66,10 @@ public class Editor extends JFrame {
 		{
 			focus = obj;
 
-			fields.put("type", String.format("%s", obj.getClass()));
-			fields.put("name", obj.name());
-			fields.put("description", obj.description());
-			fields.put("location", obj.location());
+			fields.put("Type", String.format("%s", obj.getClass()));
+			fields.put("Name", obj.name());
+			fields.put("Description", obj.description());
+			fields.put("Location", obj.location());
 			
 			DrawFields();
 		}
@@ -149,12 +160,10 @@ public class Editor extends JFrame {
 		// Populate and draw frame
 		JPanel treePanel = new JPanel();
 		treePanel.setLayout(new GridLayout(0, 1));
-		treePanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		//treePanel.setPreferredSize(new Dimension(150, 150));
 
 		RefreshRoomTree();
 		treePanel.add(tree);
-		this.getContentPane().add(BorderLayout.WEST, treePanel);
 		
 		tree.addTreeSelectionListener(new TreeSelectionListener() {
 			@Override
@@ -215,7 +224,13 @@ public class Editor extends JFrame {
 		 * Build the inspector pane that shows info about the selected object
 		 */
 		inspector = new Inspector();
-
-		this.getContentPane().add(BorderLayout.EAST, inspector);
+	}
+	
+	private void BuildExplorer()
+	{
+		/**
+		 * Build the explorer the visualizes the room layout in the editor
+		 */
+		explorer = new JPanel();
 	}
 }
