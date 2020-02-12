@@ -14,7 +14,7 @@ MAINCLASS = Tbag
 
 # Make class files from java files
 CLASSES = Format.java Console.java BaseObject.java \
-	Item.java Actor.java Room.java Tbag.java
+	Item.java Actor.java Room.java Game.java
 
 default: classes
 
