@@ -3,7 +3,7 @@ import java.util.Iterator;
 
 class Container extends BaseObject implements Iterable<BaseObject> {
 	/**
-	 * Contains store other objects
+	 * Contains are iterable objects that store other objects
 	 */
 
 	private ArrayList<BaseObject> contents;

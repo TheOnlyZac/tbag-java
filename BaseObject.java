@@ -69,8 +69,7 @@ class BaseObject {
 
 	public String toString()
 	{
-		return String.format("%s, %s %s",
-			this.name, this.description, this.location);
+		return String.format("%s", this.name);
 	}
 
 	public void moveTo(Room newRoom)

@@ -17,6 +17,7 @@ public class Editor extends JFrame {
 	
 	private ArrayList<Room> rooms;
 	
+	// Editor class constructor
 	public Editor()
 	{
 		// Create JFrame
@@ -32,6 +33,11 @@ public class Editor extends JFrame {
 		BuildInspector();
 		
 		this.setVisible(true);
+	}
+	
+	// Inspector subclass
+	private class Inspector {
+		
 	}
 	
 	public static void main(String args[])
@@ -50,8 +56,7 @@ public class Editor extends JFrame {
 	{
 		/**
 		 * Create the menubar on the editor window
-		 */
-		
+		 */		
 		menuBar = new JMenuBar();
 
 		// File Menu
@@ -91,6 +96,9 @@ public class Editor extends JFrame {
 
 	static void AboutPopup()
 	{
+		/**
+		 * Show the "About" popup with information about the app
+		 */
 		String html = "<html><body width='%1s'><H1>TBAG: Text Based Adventure Game</h1>"
 		+ "<p>A Java framework for creating text-based interactive stories.<br><br>"
 		+ "<p>Created by Zac Krasnow.";
@@ -101,9 +109,12 @@ public class Editor extends JFrame {
 	
 	private void GenTestRooms()
 	{
+		/**
+		 * Create a set of test rooms populated with generic objects
+		 */
 		// Create room tree list	
 		Room alpha = new Room("Room Alpha");		
-		alpha.addObject(new BaseObject("Tomato", "a big 'ol ripe tomato", "on a vine"));
+		alpha.addObject(new Item("Tomato", "a big 'ol ripe tomato", "on a vine"));
 		alpha.addObject(new Actor("Clown", "a scary looking clown guy", "across the room"));
 		
 		Room bravo = new Room("Room Bravo");		
@@ -117,6 +128,9 @@ public class Editor extends JFrame {
 	
 	private void BuildStoryTree()
 	{
+		/**
+		 * Create the JTree that visualizes the room heirarchy
+		 */		
 		// Populate and draw frame
 		JPanel treePanel = new JPanel();
 		treePanel.setLayout(new GridLayout(0, 1));
@@ -147,6 +161,9 @@ public class Editor extends JFrame {
 	
 	private void RefreshRoomTree()
 	{
+		/**
+		 * Refresh the JTree visualizing the room heirarchy
+		 */		
 		// create root node
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode("Rooms");
 		
@@ -179,6 +196,9 @@ public class Editor extends JFrame {
 	
 	private void BuildInspector()
 	{
+		/**
+		 * Build the inspector pane that shows info about the selected object
+		 */		
 		// Populate and draw frame
 		JPanel inspector = new JPanel();
 		inspector.setLayout(new CardLayout());
