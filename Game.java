@@ -8,13 +8,17 @@ class Game {
 	 * Main game class, handles user input and logic
 	 */
 	
+	// elements map stores all objects in the game with unique IDs
 	private Map<Integer, BaseObject> elements;
+	// rooms list stores all the rooms in the game
 	private ArrayList<Room> rooms;
 	
 	public Game()
 	{
 		elements = new HashMap<Integer, BaseObject>();
 		rooms = new ArrayList<Room>();
+		
+		
 	}
 
 	public static void main(String[] args)
@@ -37,10 +41,6 @@ class Game {
 		// Create character test object
 		Actor debugActor = new Actor("Alcyonis", "a night elf", "standing by the table");
 		Console.debug("Initialized debugActor as " + debugActor.toString());
-
-		// Move the Debug Sword into the Lobby
-		debugSword.moveTo(lobby);
-		debugActor.moveTo(lobby);
 
 		debugActor.say("It's dangerous to go alone. Take this!");
 		Console.log(String.format("%s gestures to %s on the table",

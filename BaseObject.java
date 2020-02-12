@@ -73,19 +73,6 @@ class BaseObject {
 		return String.format("%s", this.name);
 	}
 
-	public void moveTo(Room newRoom)
-	{
-		/**
-		 * Removes the object from its current Room and adds it to the 
-		 * given Room.
-		 * 
-		 * @param room 	Destination room
-		 */
-		this.room.removeObject(this);
-		newRoom.addObject(this);
-		this.room = newRoom;
-	}
-
 	public void say(String msg)
 	{
 		/**
