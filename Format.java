@@ -25,7 +25,7 @@ final class Format {
 		 * Returns "an [name]" if the object's name starts with a vowel, 
 		 * otherwise returns "a [name]"
 		 */
-		return Format.a(obj.getName());
+		return Format.a(obj.name());
 	}
 
 	public static String A(String str)

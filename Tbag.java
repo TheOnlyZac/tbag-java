@@ -13,15 +13,15 @@ class Tbag {
 		Console.debugEnabled = true; // hardcode debugMode enabled
 
 		// Create a new Lobby room
-		Room lobby = new Room("the lobby", "a waiting room with beige walls");
+		Room lobby = new Room("the lobby");
 
 		// Create Debug Sword test object
 		Item debugSword = new Item("Debug Sword",
-			"a mysterious sword made of light");
+			"a mysterious sword made of light", "on the table");
 		Console.debug("Initialized debugSword as: " + debugSword.toString());
 
 		// Create character test object
-		Actor debugActor = new Actor("Alcyonis", "a night elf");
+		Actor debugActor = new Actor("Alcyonis", "a night elf", "standing by the table");
 		Console.debug("Initialized debugActor as " + debugActor.toString());
 
 		// Move the Debug Sword into the Lobby
@@ -30,7 +30,7 @@ class Tbag {
 
 		debugActor.say("It's dangerous to go alone. Take this!");
 		Console.log(String.format("%s gestures to %s on the table",
-			debugActor.getName(), Format.a(debugSword.getDescription())));
+			debugActor.name(), Format.a(debugSword.description())));
 
 		while(true) {
 			String txt = Console.input();

@@ -99,12 +99,12 @@ public class Editor extends JFrame {
 	private void GenTestRooms()
 	{
 		// Create room tree list	
-		Room alpha = new Room("Room Alpha", "The first of two test rooms");		
-		alpha.addObject(new BaseObject("Tomato", "a big 'ol ripe tomato"));
-		alpha.addObject(new Actor("Clown", "a scary looking clown guy"));
+		Room alpha = new Room("Room Alpha");		
+		alpha.addObject(new BaseObject("Tomato", "a big 'ol ripe tomato", "on a vine"));
+		alpha.addObject(new Actor("Clown", "a scary looking clown guy", "across the room"));
 		
-		Room bravo = new Room("Room Bravo", "The second of two test rooms");		
-		bravo.addObject(new BaseObject("Orange", "a sweet 'ol fresh orange"));
+		Room bravo = new Room("Room Bravo");		
+		bravo.addObject(new BaseObject("Orange", "a sweet 'ol fresh orange", "in a bowl"));
 		
 		rooms.add(alpha);
 		rooms.add(bravo);
@@ -154,7 +154,7 @@ public class Editor extends JFrame {
 			// create a subnode under that room for each object in the room
 			for (BaseObject obj : room)
 			{
-				DefaultMutableTreeNode objNode = new DefaultMutableTreeNode(obj.getName());
+				DefaultMutableTreeNode objNode = new DefaultMutableTreeNode(obj.name());
 				rNode.add(objNode);
 			}
 		}

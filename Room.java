@@ -10,20 +10,24 @@ public class Room implements Iterable<BaseObject> {
 	private String description;
 	private ArrayList<BaseObject> contents;
 
+	// GETTERS and SETTERS
 	public String getName()	{ return name; }
 	public void setName(String name) { this.name = name; }
 
 	public String getDescription() { return description; }
 	public void setDescription(String desc) { this.description = desc; }
 
-	public static Room purgatory = new Room("Purgatory", "a space that exists nowehre");
+	// default place for new objects with no location
+	public static Room purgatory = new Room("Purgatory");
 	
+	// Iterator
 	public Iterator<BaseObject> iterator()
 	{
 		return this.contents.iterator();
 	}
 	
-	public Room(String _name, String _desc)
+	// Constructor
+	public Room(String _name)
 	{
 		/**
 		 * Initialize a new, empty room with the given name and description
@@ -31,7 +35,6 @@ public class Room implements Iterable<BaseObject> {
 		 * @param name 	The name of the new room
 		 */
 		this.name = _name;
-		this.description = _desc;
 		this.contents = new ArrayList<BaseObject>();
 	 }
 
@@ -47,10 +50,10 @@ public class Room implements Iterable<BaseObject> {
 		 *
 		 * @param obj    Object to remove
 		 */
-		Console.debug("Adding " + obj.getName() + " to Room: " + this.getName());
+		Console.debug("Adding " + obj.name() + " to Room: " + this.getName());
 		if (contents.contains(obj)) {
 			// Object already in room, returning
-			Console.debug("Failed: Room already contains " + obj.getName());
+			Console.debug("Failed: Room already contains " + obj.name());
 			return;
 		}
 		this.contents.add(obj);
@@ -64,10 +67,10 @@ public class Room implements Iterable<BaseObject> {
 		 *
 		 * @param obj    Object to remove
 		 */
-		Console.debug("Removing " + obj.getName() + " from Room: " + this.getName());
+		Console.debug("Removing " + obj.name() + " from Room: " + this.getName());
 		if (!(contents.contains(obj))) {
 			// Object not found in room, return
-			Console.debug("Failed: Room does not contain " + obj.getName());
+			Console.debug("Failed: Room does not contain " + obj.name());
 			return;
 		}
 		this.contents.remove(obj);

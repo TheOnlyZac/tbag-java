@@ -6,46 +6,74 @@ class BaseObject {
 	private String name;
 	private String description;
 	private String location;
+	
+	private Room room;
 
-	public String getName() { return name; }
-	public void setName(String name) { this.name = name; }
+	// Getters and Setters
+	public String name()
+	{
+		return this.name;
+	}
+	
+	public void name(String n)
+	{
+		this.name = n;
+	}
 
-	public String getDescription() { return description; }
-	public void setDescription(String desc) { this.description = desc; }
+	public String description()
+	{
+		return this.description;
+	}
 
-	public Room getLocation() { return location; }
+	public void description(String desc)
+	{
+		this.description = desc;
+	}
 
-	public BaseObject(String name, String desc)
+	public String location()
+	{
+		return location;
+	}
+	
+	public void location(String loc)
+	{
+		this.location = loc;
+	}
+
+	public BaseObject(String name, String desc, String loc)
 	{
 		/**
 		 * Initialize a new BaseObject with the given name and description
 		 * 
 		 * @param name 	The name of the object
 		 * @param desc 	A brief description of the object
+		 * @param 		Where the object is in space
 		 */
 		this.name = name;
 		this.description = desc;
+		this.location = loc;
 	}
 
 	public BaseObject(String name)
 	{
 		/**
-		 * Initialize a new BaseObject with the given name and a boilerplate
+		 * Initialize a new BaseObject with the given name and a default
 		 * description
 		 * 
 		 * @param name  The name of the object
 		 */
 		this.name = name;
-		this.description = "a " + this.getClass();
+		this.description = "a thing";
+		this.location = "nearby";
 	}
 
 	public String toString()
 	{
-		return String.format("%s (%s) in %s",
-			this.name, this.description, this.location.getName());
+		return String.format("%s, %s %s",
+			this.name, this.description, this.location);
 	}
 
-	public void moveTo(Room newLocation)
+	public void moveTo(Room newRoom)
 	{
 		/**
 		 * Removes the object from its current Room and adds it to the 
@@ -53,9 +81,9 @@ class BaseObject {
 		 * 
 		 * @param room 	Destination room
 		 */
-		this.location.removeObject(this);
-		newLocation.addObject(this);
-		this.location = newLocation;
+		this.room.removeObject(this);
+		newRoom.addObject(this);
+		this.room = newRoom;
 	}
 
 	public void say(String msg)
