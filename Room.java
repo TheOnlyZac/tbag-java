@@ -40,7 +40,7 @@ public class Room implements Iterable<BaseObject> {
 
 	public String toString()
 	{
-		return String.format("Room: %s", this.name);
+		return String.format("%s", this.name);
 	}
 
 	public void addObject(BaseObject obj)

@@ -3,6 +3,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeNode;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,6 +40,7 @@ public class Editor extends JFrame {
 			@Override
 			public void run()
 			{
+				Console.debugEnabled = true;
 				new Editor();
 			}
 		});
@@ -105,6 +108,8 @@ public class Editor extends JFrame {
 		
 		Room bravo = new Room("Room Bravo");		
 		bravo.addObject(new BaseObject("Orange", "a sweet 'ol fresh orange", "in a bowl"));
+		//Container table = new Container ("Table", "a mahogany table", "on the floor");
+		
 		
 		rooms.add(alpha);
 		rooms.add(bravo);
@@ -116,7 +121,7 @@ public class Editor extends JFrame {
 		JPanel treePanel = new JPanel();
 		treePanel.setLayout(new GridLayout(0, 1));
 		treePanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		treePanel.setPreferredSize(new Dimension(150, 150));
+		//treePanel.setPreferredSize(new Dimension(150, 150));
 
 		RefreshRoomTree();
 		treePanel.add(tree);
@@ -145,17 +150,26 @@ public class Editor extends JFrame {
 		// create root node
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode("Rooms");
 		
-		for (Room room : rooms)
-		{
+		for (Room room : rooms) {
 			// create a node for each Room in the rooms list
 			DefaultMutableTreeNode rNode = new DefaultMutableTreeNode(room.getName());
+			rNode.setUserObject(room);
 			root.add(rNode);
 			
 			// create a subnode under that room for each object in the room
-			for (BaseObject obj : room)
-			{
+			for (BaseObject obj : room) {
 				DefaultMutableTreeNode objNode = new DefaultMutableTreeNode(obj.name());
+				objNode.setUserObject(obj);
 				rNode.add(objNode);
+				
+				// if the obj is a container, loop again
+				/*if (obj instanceof java.lang.Iterable) {
+					for (BaseObject content : obj) {
+						DefaultMutableTreeNode cNode = new DefaultMutableTreeNode(content.name());
+						cNode.setUserObject(content);
+						objNode.add(cNode);
+					}
+				}*/
 			}
 		}
 
@@ -169,8 +183,8 @@ public class Editor extends JFrame {
 		JPanel inspector = new JPanel();
 		inspector.setLayout(new CardLayout());
 		inspector.setBorder(new EmptyBorder(5, 5, 5, 5));
-		inspector.setPreferredSize(new Dimension(200, 200));
-		inspector.setBackground(Color.gray);
+		//inspector.setPreferredSize(new Dimension(200, 200));
+		inspector.setBackground(Color.white);
 		
 		inspector.add(new JLabel("Hello, world"));
 

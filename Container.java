@@ -1,18 +1,25 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
-class Container extends BaseObject {
+class Container extends BaseObject implements Iterable<BaseObject> {
 	/**
 	 * Contains store other objects
 	 */
 
 	private ArrayList<BaseObject> contents;
 	
-	public Container(String name)
+	// Iterator
+	public Iterator<BaseObject> iterator()
+	{
+		return this.contents.iterator();
+	}
+	
+	public Container(String name, String desc, String loc)
 	{
 		/**
 		 * Initialize a new empty container
 		 */
-		super(name);
+		super(name, desc, loc);
 		this.contents = new ArrayList<BaseObject>();
 	}
 
