@@ -67,6 +67,7 @@ class BaseObject {
 		this.location = "nearby";
 	}
 
+	@Override
 	public String toString()
 	{
 		return String.format("%s", this.name);

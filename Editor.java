@@ -9,11 +9,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Editor extends JFrame {
 	
 	private JMenuBar menuBar;
 	private JTree tree;
+	private Inspector inspector;
 	
 	private ArrayList<Room> rooms;
 	
@@ -36,8 +39,33 @@ public class Editor extends JFrame {
 	}
 	
 	// Inspector subclass
-	private class Inspector {
+	private class Inspector extends JPanel {
 		
+		private BaseObject focus;
+		private Map<String, String> fields;
+		
+		public Inspector(BaseObject obj)
+		{
+			this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+			this.setBackground(Color.white);
+		
+			fields = new HashMap<String, String>();
+			this.SetFocus(obj);
+			
+			
+			for (Map.Entry<String, String> entry : fields.entrySet()) {
+				this.add(new JLabel(String.format("%s: %s", entry.getKey(), entry.getValue())));
+			}
+		}
+		
+		public void SetFocus(BaseObject obj)
+		{
+			focus = obj;
+			
+			fields.put("name", obj.name());
+			fields.put("description", obj.description());
+			fields.put("location", obj.location());
+		}
 	}
 	
 	public static void main(String args[])
@@ -198,15 +226,8 @@ public class Editor extends JFrame {
 	{
 		/**
 		 * Build the inspector pane that shows info about the selected object
-		 */		
-		// Populate and draw frame
-		JPanel inspector = new JPanel();
-		inspector.setLayout(new CardLayout());
-		inspector.setBorder(new EmptyBorder(5, 5, 5, 5));
-		//inspector.setPreferredSize(new Dimension(200, 200));
-		inspector.setBackground(Color.white);
-		
-		inspector.add(new JLabel("Hello, world"));
+		 */
+		inspector = new Inspector(new BaseObject("test object", "test desc", "test loc"));
 
 		this.getContentPane().add(BorderLayout.EAST, inspector);
 	}
