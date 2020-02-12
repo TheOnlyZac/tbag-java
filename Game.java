@@ -9,16 +9,45 @@ class Game {
 	 */
 	
 	// elements map stores all objects in the game with unique IDs
-	private Map<Integer, BaseObject> elements;
+	public Map<Integer, BaseObject> elements;
 	// rooms list stores all the rooms in the game
-	private ArrayList<Room> rooms;
+	public ArrayList<Room> rooms;
 	
 	public Game()
 	{
 		elements = new HashMap<Integer, BaseObject>();
 		rooms = new ArrayList<Room>();
+
+		// Create a new Lobby room
+		Room lobby = new Room("Lobby");
+		AddRoom(lobby);
+
+		// Create Debug Sword test object
+		Item debugSword = new Item("Debug Sword",
+			"a mysterious sword made of light", "on the table");
+		Console.debug("Initialized debugSword as: " + debugSword.toString());
+		lobby.addObject(debugSword);
+
+		// Create character test object
+		Actor debugActor = new Actor("Alcyonis", "a night elf", "standing by the table");
+		Console.debug("Initialized debugActor as " + debugActor.toString());
+		lobby.addObject(debugActor);
+
+		debugActor.say("It's dangerous to go alone. Take this!");
+		Console.log(String.format("%s gestures to %s on the table",
+			debugActor.name(), Format.a(debugSword.description())));
 		
+
+		Room alpha = new Room("Room Alpha");		
+		alpha.addObject(new Item("Tomato", "a big 'ol ripe tomato", "on a vine"));
+		alpha.addObject(new Actor("Clown", "a scary looking clown guy", "across the room"));
 		
+		Room bravo = new Room("Room Bravo");		
+		bravo.addObject(new BaseObject("Orange", "a sweet 'ol fresh orange", "in a bowl"));
+		//Container table = new Container ("Table", "a mahogany table", "on the floor");
+		
+		AddRoom(alpha);
+		AddRoom(bravo);
 	}
 
 	public static void main(String[] args)
@@ -29,22 +58,8 @@ class Game {
 			Console.debug("Starting with debug mode enabled");
 		}
 		Console.debugEnabled = true; // hardcode debugMode enabled
-
-		// Create a new Lobby room
-		Room lobby = new Room("the lobby");
-
-		// Create Debug Sword test object
-		Item debugSword = new Item("Debug Sword",
-			"a mysterious sword made of light", "on the table");
-		Console.debug("Initialized debugSword as: " + debugSword.toString());
-
-		// Create character test object
-		Actor debugActor = new Actor("Alcyonis", "a night elf", "standing by the table");
-		Console.debug("Initialized debugActor as " + debugActor.toString());
-
-		debugActor.say("It's dangerous to go alone. Take this!");
-		Console.log(String.format("%s gestures to %s on the table",
-			debugActor.name(), Format.a(debugSword.description())));
+		
+		Game game = new Game();
 
 		while(true) {
 			String txt = Console.input();

@@ -14,11 +14,11 @@ import java.util.Map;
 
 public class Editor extends JFrame {
 	
+	private Game game;
+	
 	private JMenuBar menuBar;
 	private JTree tree;
 	private Inspector inspector;
-	
-	private ArrayList<Room> rooms;
 	
 	// Editor class constructor
 	public Editor()
@@ -28,10 +28,9 @@ public class Editor extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(600, 600);
 		
-		rooms = new ArrayList<Room>();
+		game = new Game();
 		
 		BuildMenuBar();
-		GenTestRooms();
 		BuildStoryTree();
 		BuildInspector();
 		
@@ -44,27 +43,34 @@ public class Editor extends JFrame {
 		private BaseObject focus;
 		private Map<String, String> fields;
 		
-		public Inspector(BaseObject obj)
+		public Inspector()
 		{
 			this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 			this.setBackground(Color.white);
 		
 			fields = new HashMap<String, String>();
-			this.SetFocus(obj);
-			
-			
-			for (Map.Entry<String, String> entry : fields.entrySet()) {
-				this.add(new JLabel(String.format("%s: %s", entry.getKey(), entry.getValue())));
-			}
 		}
 		
 		public void SetFocus(BaseObject obj)
 		{
 			focus = obj;
-			
+
+			fields.put("type", String.format("%s", obj.getClass()));
 			fields.put("name", obj.name());
 			fields.put("description", obj.description());
 			fields.put("location", obj.location());
+			
+			DrawFields();
+		}
+		
+		private void DrawFields()
+		{
+			this.removeAll();
+			
+			for (Map.Entry<String, String> entry : fields.entrySet()) {
+				this.add(new JLabel(String.format("%s: %s", entry.getKey(), entry.getValue())));
+			}
+			
 		}
 	}
 	
@@ -135,25 +141,6 @@ public class Editor extends JFrame {
 		JOptionPane.showMessageDialog(null, String.format(html, w, w));
 	}
 	
-	private void GenTestRooms()
-	{
-		/**
-		 * Create a set of test rooms populated with generic objects
-		 */
-		// Create room tree list	
-		Room alpha = new Room("Room Alpha");		
-		alpha.addObject(new Item("Tomato", "a big 'ol ripe tomato", "on a vine"));
-		alpha.addObject(new Actor("Clown", "a scary looking clown guy", "across the room"));
-		
-		Room bravo = new Room("Room Bravo");		
-		bravo.addObject(new BaseObject("Orange", "a sweet 'ol fresh orange", "in a bowl"));
-		//Container table = new Container ("Table", "a mahogany table", "on the floor");
-		
-		
-		rooms.add(alpha);
-		rooms.add(bravo);
-	}
-	
 	private void BuildStoryTree()
 	{
 		/**
@@ -182,7 +169,7 @@ public class Editor extends JFrame {
 				Object nodeInfo = node.getUserObject();
 				
 				// react to the node selection
-				JOptionPane.showMessageDialog(null, nodeInfo);
+				if (nodeInfo instanceof BaseObject) inspector.SetFocus((BaseObject) nodeInfo);
 			}
 		});
 	}
@@ -195,7 +182,7 @@ public class Editor extends JFrame {
 		// create root node
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode("Rooms");
 		
-		for (Room room : rooms) {
+		for (Room room : game.rooms) {
 			// create a node for each Room in the rooms list
 			DefaultMutableTreeNode rNode = new DefaultMutableTreeNode(room.getName());
 			rNode.setUserObject(room);
@@ -227,7 +214,7 @@ public class Editor extends JFrame {
 		/**
 		 * Build the inspector pane that shows info about the selected object
 		 */
-		inspector = new Inspector(new BaseObject("test object", "test desc", "test loc"));
+		inspector = new Inspector();
 
 		this.getContentPane().add(BorderLayout.EAST, inspector);
 	}
