@@ -5,7 +5,7 @@ class BaseObject {
 
 	private String name;
 	private String description;
-	private Room location = Room.purgatory;
+	private String location;
 
 	public String getName() { return name; }
 	public void setName(String name) { this.name = name; }

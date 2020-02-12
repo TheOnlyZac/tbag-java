@@ -1,4 +1,7 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -21,13 +24,10 @@ public class Editor extends JFrame {
 		
 		rooms = new ArrayList<Room>();
 		
-		CreateMenuBar();
-		CreateRoomTree();		
-
-		// Populate and draw frame
-		JPanel cardsPanel = new JPanel(new CardLayout());
-		cardsPanel.add(tree);
-		this.getContentPane().add(cardsPanel);
+		BuildMenuBar();
+		GenTestRooms();
+		BuildStoryTree();
+		BuildInspector();
 		
 		this.setVisible(true);
 	}
@@ -43,7 +43,7 @@ public class Editor extends JFrame {
 		});
 	}
 	
-	private void CreateMenuBar()
+	private void BuildMenuBar()
 	{
 		/**
 		 * Create the menubar on the editor window
@@ -96,31 +96,55 @@ public class Editor extends JFrame {
 		JOptionPane.showMessageDialog(null, String.format(html, w, w));
 	}
 	
-	private void CreateRoomTree()
+	private void GenTestRooms()
 	{
 		// Create room tree list	
 		Room alpha = new Room("Room Alpha", "The first of two test rooms");		
 		alpha.addObject(new BaseObject("Tomato", "a big 'ol ripe tomato"));
+		alpha.addObject(new Actor("Clown", "a scary looking clown guy"));
 		
 		Room bravo = new Room("Room Bravo", "The second of two test rooms");		
 		bravo.addObject(new BaseObject("Orange", "a sweet 'ol fresh orange"));
 		
 		rooms.add(alpha);
 		rooms.add(bravo);
+	}
+	
+	private void BuildStoryTree()
+	{
+		// Populate and draw frame
+		JPanel treePanel = new JPanel();
+		treePanel.setLayout(new GridLayout(0, 1));
+		treePanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		treePanel.setPreferredSize(new Dimension(150, 150));
+
+		RefreshRoomTree();
+		treePanel.add(tree);
+		this.getContentPane().add(BorderLayout.WEST, treePanel);
 		
+		tree.addTreeSelectionListener(new TreeSelectionListener() {
+			@Override
+			public void valueChanged(TreeSelectionEvent e) {
+				DefaultMutableTreeNode node = (DefaultMutableTreeNode)
+						tree.getLastSelectedPathComponent();
+				
+				// if nothing selected
+				if (node == null) return;
+				
+				// retrieve node that was selected
+				Object nodeInfo = node.getUserObject();
+				
+				// react to the node selection
+				JOptionPane.showMessageDialog(null, nodeInfo);
+			}
+		});
+	}
+	
+	private void RefreshRoomTree()
+	{
 		// create root node
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode("Rooms");
 		
-		// refresh rooms
-		RefreshRoomTree(root);
-		
-		// create tree by passing in root node
-		tree = new JTree(root);
-		add(tree);
-	}
-	
-	private void RefreshRoomTree(DefaultMutableTreeNode root)
-	{
 		for (Room room : rooms)
 		{
 			// create a node for each Room in the rooms list
@@ -134,5 +158,22 @@ public class Editor extends JFrame {
 				rNode.add(objNode);
 			}
 		}
+
+		// overwrite tree by passing in root node
+		tree = new JTree(root);
+	}
+	
+	private void BuildInspector()
+	{
+		// Populate and draw frame
+		JPanel inspector = new JPanel();
+		inspector.setLayout(new CardLayout());
+		inspector.setBorder(new EmptyBorder(5, 5, 5, 5));
+		inspector.setPreferredSize(new Dimension(200, 200));
+		inspector.setBackground(Color.gray);
+		
+		inspector.add(new JLabel("Hello, world"));
+
+		this.getContentPane().add(BorderLayout.EAST, inspector);
 	}
 }

@@ -10,23 +10,11 @@ public class Room implements Iterable<BaseObject> {
 	private String description;
 	private ArrayList<BaseObject> contents;
 
-	public String getName()
-	{
-		return name;
-	}
-	public void setName(String name)
-	{
-		this.name = name;
-	}
+	public String getName()	{ return name; }
+	public void setName(String name) { this.name = name; }
 
-	public String getDescription()
-	{
-		return description;
-	}
-	public void setDescription(String desc)
-	{
-		this.description = desc;
-	}
+	public String getDescription() { return description; }
+	public void setDescription(String desc) { this.description = desc; }
 
 	public static Room purgatory = new Room("Purgatory", "a space that exists nowehre");
 	
