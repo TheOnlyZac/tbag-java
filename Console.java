@@ -23,7 +23,7 @@ final class Console {
 	public static String input()
 	{
 		/**
-		 * Promps the user for input and returns the full line written
+		 * Prompts the user for input and returns the full line written
 		 */
 		Scanner scanner = new Scanner(System.in);
 		String text = scanner.nextLine();
@@ -75,7 +75,7 @@ final class Console {
 	{
 		/**
 		 * Formats a debug message with a timestamp, and displays it in the 
-		 * mesasge log. Will only print the message if debug mode is enabled.
+		 * message log. Will only print the message if debug mode is enabled.
 		 * 
 		 * @param text  The message to be displayed
 		 */

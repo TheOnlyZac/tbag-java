@@ -72,17 +72,28 @@ class Game {
 	
 	private void AddRoom(Room room)
 	{
+		/**
+		 * 
+		 */
 		rooms.add(room);
 	}
 	
 	private void AddObject(BaseObject obj)
 	{
+		/**
+		 * Generate a random ID for an object and add it to the game elements array
+		 * 
+		 * @param obj 	The object to add
+		 */
 		// todo: make sure ID isn't already in hashmap before adding
 		elements.put(genId(), obj);
 	}
 	
 	private Integer genId()
 	{
+		/**
+		 * Generate a random 4-digit integer ID
+		 */
 		Random r = new Random();
 		return r.nextInt((9999 - 1000) + 1) + 1;
 	}
@@ -90,9 +101,7 @@ class Game {
 
 	private static int parseInput(String text)
 	{
-		/**
-		 * Parse the entered text into a more convenient datatype
-		 */
+		// todo: move input parser into Console class
 		String[] words = text.split(" ");
 		if (words[0].equals("exit")) return -1;
 		return 0;

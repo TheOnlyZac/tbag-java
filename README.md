@@ -12,7 +12,7 @@ To generate just class files, do `make classes`.
 The main game class that keeps track of game objects and will eventually the flow of the story.
 
 ### Editor
-An AWT interface that will eventually be used for creating/editing scenes in the story. It currently offers a rough preview of some test objects. The interface is comprised of a room/object heirarchy on the left, an inspector on the right, and a (currently) empty resizable space in between. 
+An AWT interface that will eventually be used for creating/editing scenes in the story. It currently offers a rough preview of some test objects. The interface  is comprised of a room/object heirarchy on the left, an inspector on the right, and a (currently) empty resizable space in between. 
 
 ### BaseObject
 The base class for all game objects. Actor, Item, and Container are extensions of BaseObject that are specialized to serve various purposes to the story.

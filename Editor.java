@@ -20,6 +20,7 @@ public class Editor extends JFrame {
 	private JSplitPane rightPane;
 	
 	private JMenuBar menuBar;
+	private JToolBar toolbar;
 	private JTree tree;
 	private Inspector inspector;
 	private JPanel explorer;
@@ -35,6 +36,7 @@ public class Editor extends JFrame {
 		game = new Game();
 		
 		BuildMenuBar();
+		BuildToolbar();
 		BuildStoryTree();
 		BuildInspector();
 		BuildExplorer();
@@ -152,6 +154,15 @@ public class Editor extends JFrame {
 		JOptionPane.showMessageDialog(null, String.format(html, w, w));
 	}
 	
+	private void BuildToolbar()
+	{
+		toolbar = new JToolBar();
+		toolbar.add(new JButton("Start"));
+
+		//this.getContentPane().add(BorderLayout.PAGE_START, toolbar);
+		
+	}
+	
 	private void BuildStoryTree()
 	{
 		/**
@@ -159,11 +170,11 @@ public class Editor extends JFrame {
 		 */		
 		// Populate and draw frame
 		JPanel treePanel = new JPanel();
-		treePanel.setLayout(new GridLayout(0, 1));
+		treePanel.setLayout(new BorderLayout());
 		//treePanel.setPreferredSize(new Dimension(150, 150));
 
 		RefreshRoomTree();
-		treePanel.add(tree);
+		treePanel.add(BorderLayout.CENTER, tree);
 		
 		tree.addTreeSelectionListener(new TreeSelectionListener() {
 			@Override
@@ -181,6 +192,9 @@ public class Editor extends JFrame {
 				if (nodeInfo instanceof BaseObject) inspector.SetFocus((BaseObject) nodeInfo);
 			}
 		});
+		
+		JButton addObjBtn = new JButton("+");
+		treePanel.add(BorderLayout.SOUTH, addObjBtn);
 	}
 	
 	private void RefreshRoomTree()
@@ -232,5 +246,6 @@ public class Editor extends JFrame {
 		 * Build the explorer the visualizes the room layout in the editor
 		 */
 		explorer = new JPanel();
+		explorer.add(new JLabel("Explorer"));
 	}
 }
