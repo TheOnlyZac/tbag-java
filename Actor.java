@@ -6,11 +6,12 @@ class Actor extends BaseObject {
 	 * actors.
 	 */
 
-	private ArrayList<BaseObject> inventory;
+	private Container inventory;
 
 	public Actor(String name, String desc, String loc)
 	{
 		super(name, desc, loc);
-		inventory = new ArrayList<BaseObject>();
+		inventory = new Container(String.format("%s's Inventory",this.name()),
+				"a worn leather backpack", "held by " + this.name());
 	}
 }

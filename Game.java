@@ -24,7 +24,7 @@ class Game {
 
 		// Create Debug Sword test object
 		Item debugSword = new Item("Debug Sword",
-			"a mysterious sword made of light", "on the table");
+			"a mysterious sword made of light", "on the table", 2);
 		Console.debug("Initialized debugSword as: " + debugSword.toString());
 		lobby.addObject(debugSword);
 
@@ -39,7 +39,7 @@ class Game {
 		
 
 		Room alpha = new Room("Room Alpha");		
-		alpha.addObject(new Item("Tomato", "a big 'ol ripe tomato", "on a vine"));
+		alpha.addObject(new Item("Tomato", "a big 'ol ripe tomato", "on a vine", 1));
 		alpha.addObject(new Actor("Clown", "a scary looking clown guy", "across the room"));
 		
 		Room bravo = new Room("Room Bravo");		
