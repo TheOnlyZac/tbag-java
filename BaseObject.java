@@ -80,6 +80,6 @@ class BaseObject {
 		 * 
 		 * @param msg 	Message to be spoken
 		 */
-		Console.say(this.name, msg);
+		Console.print(Format.say(this.name, msg));
 	}
 }

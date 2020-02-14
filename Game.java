@@ -34,8 +34,8 @@ class Game {
 		lobby.addObject(debugActor);
 
 		debugActor.say("It's dangerous to go alone. Take this!");
-		Console.log(String.format("%s gestures to %s on the table",
-			debugActor.name(), Format.a(debugSword.description())));
+		Console.print(debugActor, " gestures to ",
+				Format.a(debugSword.description()), " on the table");
 		
 
 		Room alpha = new Room("Room Alpha");		
@@ -67,7 +67,7 @@ class Game {
 			if (parseInput(txt) == -1) break;
 		}
 
-		Console.log("Thank you for playing Wing Commander!");
+		Console.print("Thank you for playing Wing Commander!");
 	}
 	
 	private void AddRoom(Room room)

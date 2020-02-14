@@ -47,4 +47,16 @@ final class Format {
 		String aStr = Format.a(obj);
 		return aStr.substring(0, 1).toUpperCase() + aStr.substring(1);
 	}
+
+
+	public static String say(String speaker, String text)
+	{
+		/**
+		 * Displays the text as a line of dialogue spoken by the speaker
+		 * 
+		 * @param speaker 	The name of the thing doing the speaking
+		 * @param text 		The message to be spoken
+		 */
+		return String.format("%s says \"%s\"", speaker, text);
+	}
 }

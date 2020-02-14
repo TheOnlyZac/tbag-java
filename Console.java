@@ -16,7 +16,7 @@ final class Console {
 		 * 
 		 * @param d     Debug mode enabled?
 		 */
-		log("Initialized new console.");
+		print("Initialized new console.");
 		debug("Debug mode enabled");
 	}
 
@@ -38,37 +38,18 @@ final class Console {
 		return new SimpleDateFormat("HH:mm:ss").format(new Date());
 	}
 
-	public static void print(String text)
+	public static void print(Object... blocks)
 	{
 		/**
 		 * Print a line of text to the console, no frills.
 		 * 
 		 * @param text  The text to be printed
 		 */
-		System.out.println(text);
-	}
-
-	public static void log(String text)
-	{
-		/**
-		 * Formats a string and displays it in the message log, line by line
-		 * 
-		 * @param text  The text to be displayed
-		 */
-		for (String s : text.split("\n")) {
-			Console.print(">" + s);
+		String s = "";
+		for (Object b : blocks) {
+			s += b.toString();
 		}
-	}
-
-	public static void say(String speaker, String text)
-	{
-		/**
-		 * Displays the text as a line of dialogue spoken by the speaker
-		 * 
-		 * @param speaker 	The name of the thing doing the speaking
-		 * @param text 		The message to be spoken
-		 */
-		Console.log(String.format("%s says \"%s\"", speaker, text));
+		System.out.println(s);
 	}
 
 	public static void debug(String text)
@@ -81,7 +62,7 @@ final class Console {
 		 */
 		if (!debugEnabled) return;
 		for (String s : text.split("\n")) {
-			Console.print(">>" + timestamp() + " " + s);
+			Console.print(">>>" + timestamp() + " " + s);
 		}
 	}
 }
