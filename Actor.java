@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 class Actor extends BaseObject {
 	/**
 	 * Actors are living objects that can perform actions on objects and other
