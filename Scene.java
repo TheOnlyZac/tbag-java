@@ -1,9 +1,9 @@
 import java.util.Iterator;
 import java.util.ArrayList;
 
-public class Room implements Iterable<BaseObject> {
+public class Scene implements Iterable<BaseObject> {
 	/**
-	 * A Room is the context for which Actors can interact with Objects
+	 * A Scene is the context for which Actors can interact with Objects
 	 */
 
 	private String name;
@@ -18,7 +18,7 @@ public class Room implements Iterable<BaseObject> {
 	public void setDescription(String desc) { this.description = desc; }
 
 	// default place for new objects with no location
-	public static Room purgatory = new Room("Purgatory");
+	public static Scene purgatory = new Scene("Purgatory");
 	
 	// Iterator
 	public Iterator<BaseObject> iterator()
@@ -27,7 +27,7 @@ public class Room implements Iterable<BaseObject> {
 	}
 	
 	// Constructor
-	public Room(String _name)
+	public Scene(String _name)
 	{
 		/**
 		 * Initialize a new, empty room with the given name and description
@@ -50,10 +50,10 @@ public class Room implements Iterable<BaseObject> {
 		 *
 		 * @param obj    Object to remove
 		 */
-		//System.out.println("Adding " + obj.name() + " to Room: " + this.getName());
+		//System.out.println("Adding " + obj.name() + " to Scene: " + this.getName());
 		if (contents.contains(obj)) {
 			// Object already in room, returning
-			System.out.println("Failed: Room already contains " + obj.name());
+			System.out.println("Failed: Scene already contains " + obj.name());
 			return;
 		}
 		this.contents.add(obj);
@@ -67,13 +67,13 @@ public class Room implements Iterable<BaseObject> {
 		 *
 		 * @param obj    Object to remove
 		 */
-		//System.out.println("Removing " + obj.name() + " from Room: " + this.getName());
+		//System.out.println("Removing " + obj.name() + " from Scene: " + this.getName());
 		if (!(contents.contains(obj))) {
 			// Object not found in room, return
-			System.out.println("Failed: Room does not contain " + obj.name());
+			System.out.println("Failed: Scene does not contain " + obj.name());
 			return;
 		}
 		this.contents.remove(obj);
-		//Console.debug("Successfully removed from Room");
+		//Console.debug("Successfully removed from Scene");
 	}
 }

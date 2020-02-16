@@ -202,14 +202,14 @@ public class Editor extends JFrame {
 		// create root node
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode("Rooms");
 		
-		for (Room room : game.rooms) {
-			// create a node for each Room in the rooms list
-			DefaultMutableTreeNode rNode = new DefaultMutableTreeNode(room.getName());
-			rNode.setUserObject(room);
+		for (Scene scene : game.scenes) {
+			// create a node for each Scene in the scenes list
+			DefaultMutableTreeNode rNode = new DefaultMutableTreeNode(scene.getName());
+			rNode.setUserObject(scene);
 			root.add(rNode);
 			
 			// create a subnode under that room for each object in the room
-			for (BaseObject obj : room) {
+			for (BaseObject obj : scene) {
 				DefaultMutableTreeNode objNode = new DefaultMutableTreeNode(obj.name());
 				objNode.setUserObject(obj);
 				rNode.add(objNode);

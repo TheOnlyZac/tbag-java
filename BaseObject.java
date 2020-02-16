@@ -7,7 +7,7 @@ class BaseObject {
 	private String description;
 	private String location;
 	
-	private Room room;
+	private Scene scene;
 
 	// Getters and Setters
 	public String name()

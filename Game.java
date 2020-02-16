@@ -9,7 +9,7 @@ class Game {
 	 */
 	
 	public Map<Integer, BaseObject> elements; // elements map stores all objects in the game with unique IDs
-	public ArrayList<Room> rooms; // rooms list stores all the rooms in the game
+	public ArrayList<Scene> scenes; // scenes list stores all the scenes in the game
 	
 	public Console console;
 	
@@ -17,10 +17,10 @@ class Game {
 	public Game()
 	{
 		elements = new HashMap<Integer, BaseObject>();
-		rooms = new ArrayList<Room>();
+		scenes = new ArrayList<Scene>();
 		console = new Console();
 
-		Room lobby = new Room("Lobby");
+		Scene lobby = new Scene("Lobby");
 
 		Item debugSword = new Item("Debug Sword",
 			"a mysterious sword made of light", "on the table", 2);
@@ -36,13 +36,13 @@ class Game {
 		console.print(debugActor, " gestures to ",
 				Format.a(debugSword.description()), " on the table");
 		
-		Room alpha = new Room("Room Alpha");		
+		Scene alpha = new Scene("Scene Alpha");		
 		
 		alpha.addObject(new Item("Tomato", "a big 'ol ripe tomato", "on a vine", 1));
 		alpha.addObject(new Actor("Clown", "a scary looking clown guy", "across the room"));
 		AddRoom(alpha);
 		
-		Room bravo = new Room("Room Bravo");	
+		Scene bravo = new Scene("Scene Bravo");	
 		
 		bravo.addObject(new BaseObject("Orange", "a sweet 'ol fresh orange", "in a bowl"));
 		bravo.addObject(new Container ("Table", "a mahogany table", "on the floor"));
@@ -65,12 +65,12 @@ class Game {
 		
 	}
 	
-	private void AddRoom(Room room)
+	private void AddRoom(Scene scene)
 	{
 		/**
 		 * 
 		 */
-		rooms.add(room);
+		scenes.add(scene);
 	}
 	
 	private void AddObject(BaseObject obj)
