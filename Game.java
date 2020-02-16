@@ -8,8 +8,8 @@ class Game {
 	 * Main game class, handles user input and logic
 	 */
 	
-	public Map<Integer, BaseObject> elements; // elements map stores all objects in the game with unique IDs
-	public ArrayList<Scene> scenes; // scenes list stores all the scenes in the game
+	public Map<Integer, BaseObject> elements; // maps all objects in the game to unique IDs
+	public ArrayList<Scene> scenes; // stores all the scenes in the game
 	
 	public Console console;
 	
@@ -34,7 +34,7 @@ class Game {
 		lobby.addObject(table);
 		lobby.addObject(debugSword);
 		lobby.addObject(debugActor);
-		AddRoom(lobby);
+		AddScene(lobby);
 
 		console.print(Format.say(debugActor.name(), "It's dangerous to go alone. Take this!"));
 		console.print(debugActor, " gestures to ",
@@ -51,7 +51,7 @@ class Game {
 		
 		office.addObject(papers);
 		office.addObject(desk);
-		AddRoom(office);
+		AddScene(office);
 
 	}
 
@@ -68,7 +68,7 @@ class Game {
 		
 	}
 	
-	private void AddRoom(Scene scene)
+	private void AddScene(Scene scene)
 	{
 		/**
 		 * 
