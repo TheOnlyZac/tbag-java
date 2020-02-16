@@ -36,7 +36,6 @@ class Game {
 		console.print(debugActor, " gestures to ",
 				Format.a(debugSword.description()), " on the table");
 		
-
 		Room alpha = new Room("Room Alpha");		
 		
 		alpha.addObject(new Item("Tomato", "a big 'ol ripe tomato", "on a vine", 1));

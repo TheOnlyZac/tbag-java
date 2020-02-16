@@ -1,7 +1,3 @@
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.util.Scanner;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -35,17 +31,17 @@ class Console extends JFrame {
 		textPanel.setBackground(Color.BLACK);
 		setVisible(true);
 		
-		print("Initialized new console.");
-		debug("Debug mode enabled");
+		debug("Initialized new console (debug mode enabled).");
 		
 	}
 
 	public void print(Object... blocks)
 	{
 		/**
-		 * Print a line of text to the console, no frills.
+		 * Take a sequence of objects and print them to the console as a string
+		 * in order.
 		 * 
-		 * @param text  The text to be printed
+		 * @param blocks  The elements that compose the string
 		 */
 		String s = "";
 		for (Object b : blocks) {
