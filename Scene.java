@@ -18,7 +18,7 @@ public class Scene implements Iterable<BaseObject> {
 	public void setDescription(String desc) { this.description = desc; }
 
 	// default place for new objects with no location
-	public static Scene purgatory = new Scene("Purgatory");
+	public static Scene purgatory = new Scene("Purgatory", "an empty, boundless void");
 	
 	// Iterator
 	public Iterator<BaseObject> iterator()
@@ -27,7 +27,7 @@ public class Scene implements Iterable<BaseObject> {
 	}
 	
 	// Constructor
-	public Scene(String _name)
+	public Scene(String _name, String _desc)
 	{
 		/**
 		 * Initialize a new, empty room with the given name and description
@@ -35,6 +35,7 @@ public class Scene implements Iterable<BaseObject> {
 		 * @param name 	The name of the new room
 		 */
 		this.name = _name;
+		this.description = _desc;
 		this.contents = new ArrayList<BaseObject>();
 	 }
 

@@ -20,14 +20,19 @@ class Game {
 		scenes = new ArrayList<Scene>();
 		console = new Console();
 
-		Scene lobby = new Scene("Lobby");
+		// LOBBY SCENE
+		Scene lobby = new Scene("Lobby", "a simple waiting room with beige walls");
 
 		Item debugSword = new Item("Debug Sword",
-			"a mysterious sword made of light", "on the table", 2);
+			"a mysterious sword made of light", "on the table", 4);
 
-		Actor debugActor = new Actor("Alcyonis", "a night elf", "standing by the table");
+		Actor debugActor = new Actor("Alcyonis",
+				"a night elf", "standing by the table");
+		
+		Container table = new Container ("Table",
+				"a mahogany table", "on the floor");
 
-
+		lobby.addObject(table);
 		lobby.addObject(debugSword);
 		lobby.addObject(debugActor);
 		AddRoom(lobby);
@@ -36,19 +41,18 @@ class Game {
 		console.print(debugActor, " gestures to ",
 				Format.a(debugSword.description()), " on the table");
 		
-		Scene alpha = new Scene("Scene Alpha");		
+		// OFFICE SCENE
+		Scene office = new Scene("Scene Alpha", "the first of two test rooms");		
 		
-		alpha.addObject(new Item("Tomato", "a big 'ol ripe tomato", "on a vine", 1));
-		alpha.addObject(new Actor("Clown", "a scary looking clown guy", "across the room"));
-		AddRoom(alpha);
+		Item papers = new Item("Papers",
+				"a stack of paperwork", "on the desk", 1);
 		
-		Scene bravo = new Scene("Scene Bravo");	
+		Container desk = new Container("desk",
+				"a simple wooden desk", "on the far side of the room");
 		
-		bravo.addObject(new BaseObject("Orange", "a sweet 'ol fresh orange", "in a bowl"));
-		bravo.addObject(new Container ("Table", "a mahogany table", "on the floor"));
-		AddRoom(bravo);
-
-
+		office.addObject(papers);
+		office.addObject(desk);
+		AddRoom(office);
 
 	}
 
