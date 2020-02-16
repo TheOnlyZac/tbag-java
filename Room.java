@@ -50,10 +50,10 @@ public class Room implements Iterable<BaseObject> {
 		 *
 		 * @param obj    Object to remove
 		 */
-		Console.debug("Adding " + obj.name() + " to Room: " + this.getName());
+		//System.out.println("Adding " + obj.name() + " to Room: " + this.getName());
 		if (contents.contains(obj)) {
 			// Object already in room, returning
-			Console.debug("Failed: Room already contains " + obj.name());
+			System.out.println("Failed: Room already contains " + obj.name());
 			return;
 		}
 		this.contents.add(obj);
@@ -67,10 +67,10 @@ public class Room implements Iterable<BaseObject> {
 		 *
 		 * @param obj    Object to remove
 		 */
-		Console.debug("Removing " + obj.name() + " from Room: " + this.getName());
+		//System.out.println("Removing " + obj.name() + " from Room: " + this.getName());
 		if (!(contents.contains(obj))) {
 			// Object not found in room, return
-			Console.debug("Failed: Room does not contain " + obj.name());
+			System.out.println("Failed: Room does not contain " + obj.name());
 			return;
 		}
 		this.contents.remove(obj);

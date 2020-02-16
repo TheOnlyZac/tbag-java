@@ -8,66 +8,62 @@ class Game {
 	 * Main game class, handles user input and logic
 	 */
 	
-	// elements map stores all objects in the game with unique IDs
-	public Map<Integer, BaseObject> elements;
-	// rooms list stores all the rooms in the game
-	public ArrayList<Room> rooms;
+	public Map<Integer, BaseObject> elements; // elements map stores all objects in the game with unique IDs
+	public ArrayList<Room> rooms; // rooms list stores all the rooms in the game
+	
+	public Console console;
+	
 	
 	public Game()
 	{
 		elements = new HashMap<Integer, BaseObject>();
 		rooms = new ArrayList<Room>();
+		console = new Console();
 
-		// Create a new Lobby room
 		Room lobby = new Room("Lobby");
-		AddRoom(lobby);
 
-		// Create Debug Sword test object
 		Item debugSword = new Item("Debug Sword",
 			"a mysterious sword made of light", "on the table", 2);
-		Console.debug("Initialized debugSword as: " + debugSword.toString());
-		lobby.addObject(debugSword);
 
-		// Create character test object
 		Actor debugActor = new Actor("Alcyonis", "a night elf", "standing by the table");
-		Console.debug("Initialized debugActor as " + debugActor.toString());
-		lobby.addObject(debugActor);
 
-		debugActor.say("It's dangerous to go alone. Take this!");
-		Console.print(debugActor, " gestures to ",
+
+		lobby.addObject(debugSword);
+		lobby.addObject(debugActor);
+		AddRoom(lobby);
+
+		console.print(Format.say(debugActor.name(), "It's dangerous to go alone. Take this!"));
+		console.print(debugActor, " gestures to ",
 				Format.a(debugSword.description()), " on the table");
 		
 
 		Room alpha = new Room("Room Alpha");		
+		
 		alpha.addObject(new Item("Tomato", "a big 'ol ripe tomato", "on a vine", 1));
 		alpha.addObject(new Actor("Clown", "a scary looking clown guy", "across the room"));
-		
-		Room bravo = new Room("Room Bravo");		
-		bravo.addObject(new BaseObject("Orange", "a sweet 'ol fresh orange", "in a bowl"));
-		//Container table = new Container ("Table", "a mahogany table", "on the floor");
-		
 		AddRoom(alpha);
+		
+		Room bravo = new Room("Room Bravo");	
+		
+		bravo.addObject(new BaseObject("Orange", "a sweet 'ol fresh orange", "in a bowl"));
+		bravo.addObject(new Container ("Table", "a mahogany table", "on the floor"));
 		AddRoom(bravo);
+
+
+
 	}
 
 	public static void main(String[] args)
 	{
+		Game game = new Game();
+		
 		// Check if debug mode enabled
 		if (args.length > 0 && args[0].equals("-d")) {
 			Console.debugEnabled = true;
-			Console.debug("Starting with debug mode enabled");
+			game.console.debug("Starting with debug mode enabled");
 		}
 		Console.debugEnabled = true; // hardcode debugMode enabled
 		
-		Game game = new Game();
-
-		while(true) {
-			String txt = Console.input();
-			//Console.log(txt);
-			if (parseInput(txt) == -1) break;
-		}
-
-		Console.print("Thank you for playing Wing Commander!");
 	}
 	
 	private void AddRoom(Room room)

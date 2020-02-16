@@ -73,13 +73,13 @@ class BaseObject {
 		return String.format("%s", this.name);
 	}
 
-	public void say(String msg)
+	/* public void say(String msg)
 	{
 		/**
 		 * Makes the object say the given message as dialogue
 		 * 
 		 * @param msg 	Message to be spoken
 		 */
-		Console.print(Format.say(this.name, msg));
-	}
+		/* Console.print(Format.say(this.name, msg));
+	} */
 }

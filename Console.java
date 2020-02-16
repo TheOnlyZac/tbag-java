@@ -2,43 +2,45 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
-final class Console {
+import javax.swing.*;
+import java.awt.*;
+
+class Console extends JFrame {
 	/**
 	 * The Console handles writing text to the screen.
 	 */
 	
-	static Boolean debugEnabled = false;
+	public static Boolean debugEnabled = true;
+	
+	private JPanel textPanel;
 
-	private Console()
+	public Console()
 	{
 		/**
 		 * Initialize a new Console instance.
 		 * 
 		 * @param d     Debug mode enabled?
 		 */
+		// Create JFrame
+		setTitle("TBAG Console");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(500, 400);
+		
+		textPanel = new JPanel();
+		
+		BoxLayout boxLayout = new BoxLayout(textPanel, BoxLayout.Y_AXIS);
+		textPanel.setLayout(boxLayout);
+		getContentPane().add(textPanel);
+		
+		textPanel.setBackground(Color.BLACK);
+		setVisible(true);
+		
 		print("Initialized new console.");
 		debug("Debug mode enabled");
+		
 	}
 
-	public static String input()
-	{
-		/**
-		 * Prompts the user for input and returns the full line written
-		 */
-		Scanner scanner = new Scanner(System.in);
-		String text = scanner.nextLine();
-		return text;
-	}
-
-	private static String timestamp()
-	{
-		/**
-		 * Get the current time formatted as HH:mm:ss.
-		 */
-		return new SimpleDateFormat("HH:mm:ss").format(new Date());
-	}
-
-	public static void print(Object... blocks)
+	public void print(Object... blocks)
 	{
 		/**
 		 * Print a line of text to the console, no frills.
@@ -50,9 +52,16 @@ final class Console {
 			s += b.toString();
 		}
 		System.out.println(s);
+		
+		JLabel label = new JLabel();
+		label.setText(s);
+		label.setForeground(Color.white);
+		
+		textPanel.add(label);
+		revalidate();
 	}
-
-	public static void debug(String text)
+	
+	public void debug(String text)
 	{
 		/**
 		 * Formats a debug message with a timestamp, and displays it in the 
@@ -62,7 +71,7 @@ final class Console {
 		 */
 		if (!debugEnabled) return;
 		for (String s : text.split("\n")) {
-			Console.print(">>>" + timestamp() + " " + s);
+			this.print(">>>", Format.timestamp(), " ", s);
 		}
 	}
 }

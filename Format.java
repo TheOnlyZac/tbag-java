@@ -1,9 +1,19 @@
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
 final class Format {
 	/**
 	 * Format is a utility class that handles formatting text
 	 */
+
+	public static String timestamp()
+	{
+		/**
+		 * Get the current time formatted as HH:mm:ss.
+		 */
+		return new SimpleDateFormat("HH:mm:ss").format(new Date());
+	}
 
 	public static String a(String str)
 	{
