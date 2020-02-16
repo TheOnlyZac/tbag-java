@@ -3,7 +3,6 @@ JC = javac
 CFLAGS = -g
 JAR = jar
 JFLAGS = cfm tbag.jar
-MAINCLASS = Editor
 
 # Clear default targets for building .class files from .java files
 .SUFFIXES: .java .class
@@ -14,23 +13,23 @@ MAINCLASS = Editor
 
 # Make class files from java files
 CLASSES = Format.java Console.java BaseObject.java \
-	Item.java Actor.java Room.java Game.java Editor.java
+	Item.java Actor.java Scene.java Game.java Editor.java
 
-default: jar
+default: game
 
 classes: $(CLASSES:.java=.class)
 
-# Make manifest file for JAR with main-class manifest
-manifest:
-	$(RM) Manifest.txt
-	echo Main-Class: $(MAINCLASS) >> Manifest.txt
-
 # Build jar file from classes with manifest
-jar: classes manifest
+
+editor: classes
+	$(RM) Manifest.txt
+	echo Main-Class: Editor >> Manifest.txt
 	$(JAR) $(JFLAGS) Manifest.txt *.class
 
-editor:
-	$(JC) $(CFLAGS) Editor.java
+game: classes
+	$(RM) Manifest.txt
+	echo Main-Class: Game >> Manifest.txt
+	$(JAR) $(JFLAGS) Manifest.txt *.class
 
 # Clean up compiled files from the directory
 clean:

@@ -13,7 +13,6 @@ class Game {
 	
 	public Console console;
 	
-	
 	public Game()
 	{
 		elements = new HashMap<Integer, BaseObject>();
@@ -42,7 +41,7 @@ class Game {
 				Format.a(debugSword.description()), " on the table");
 		
 		// OFFICE SCENE
-		Scene office = new Scene("Scene Alpha", "the first of two test rooms");		
+		Scene office = new Scene("Office", "a dimly lit office workspace");		
 		
 		Item papers = new Item("Papers",
 				"a stack of paperwork", "on the desk", 1);
