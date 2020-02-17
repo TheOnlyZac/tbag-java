@@ -23,4 +23,14 @@ class Actor extends BaseObject {
 		 */
 		this.inventory.addObject(item);
 	}
+	
+	public void say(Console c, String s, BaseObject... blocks)
+	{
+		BaseObject[] thisArr = {this};
+		BaseObject[] blocksFinal = new BaseObject[blocks.length + 1];
+		System.arraycopy(thisArr, 0, blocksFinal, 0, 1);
+		System.arraycopy(blocks, 0, blocksFinal, 1, blocks.length);
+		
+		c.printf("%xn " + String.format(" says \"%s\"", s), blocksFinal);
+	}
 }

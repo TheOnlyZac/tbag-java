@@ -53,7 +53,7 @@ class Console extends JFrame {
 		for (Object b : blocks) {
 			if (b instanceof BaseObject) {
 				// if it is a baseObject, create a new Clickable and add it to the panel
-				Clickable c = new Clickable(((BaseObject) b).name(), (BaseObject) b);
+				Clickable c = new Clickable(this, ((BaseObject) b).name(), (BaseObject) b);
 				line.add(c);
 			} else {
 				// if it is anything else, simply add it as a string on a JLabel
@@ -70,7 +70,7 @@ class Console extends JFrame {
 		revalidate();
 	}
 	
-	public void printf(String fstring, BaseObject... blocks)
+	public void printf(String fstring, Object... blocks)
 	{
 		/**
 		 * Take a string and substitute each %xy block with the given
@@ -118,7 +118,17 @@ class Console extends JFrame {
 			}
 			
 			// store the current BaseObject as curr
-			BaseObject curr = blocks[i];
+			BaseObject curr;
+			try {
+				curr = (BaseObject) blocks[i];
+			} catch (Exception e) { 
+				if (blocks[i] instanceof String) {
+					line.add(new JLabel(blocks[i].toString() + " "));
+				}
+				i++;
+				j++;
+				continue;
+			}
 			
 			String partA = s.substring(0, 2); // part a = substitution
 			String partB = s.substring(2); // part b = the string following
@@ -157,7 +167,7 @@ class Console extends JFrame {
 					break;
 			};
 			
-			c = new Clickable(sub, curr);
+			c = new Clickable(this, sub, curr);
 			//c.setBorder(BorderFactory.createLineBorder(Color.black));
 			
 			line.add(c);

@@ -21,6 +21,23 @@ class Game {
 		scenes = new ArrayList<Scene>();
 		sceneManager = new SceneManager(console);
 
+	}
+
+	public static void main(String[] args)
+	{
+		Game game = new Game();
+		game.GenTestScenes();
+		
+		// Check if debug mode enabled
+		if (args.length > 0 && args[0].equals("-d")) {
+			Console.debugEnabled = true;
+			game.console.debug("Starting with debug mode enabled");
+		}
+		
+	}
+	
+	public void GenTestScenes()
+	{
 		// LOBBY SCENE
 		Scene lobby = new Scene("lobby",
 				"a simple waiting room with beige walls",
@@ -60,24 +77,14 @@ class Game {
 		lobby.addObject(door);
 		sceneManager.loadScene(lobby);
 
-		console.printf("%xn says, \"It's dangerous to go alone, take this!\"",
-				debugActor);
-		console.printf("%xn gestures to %tn on the table.",
-				debugActor, debugSword);
+		BaseObject testObj = new BaseObject("testobj", "testdesc", "testloc");
+		
+		//console.printf("%xn says, \"It's dangerous to go alone, take this!\"",
+		//		debugActor);
+		//console.printf("%xn gestures to %tn on the table.",
+		//		debugActor, debugSword);
+		debugActor.say(console, "Look at that %xn %xl!", debugSword, debugSword);
 		//sceneManager.loadScene(office);
-
-	}
-
-	public static void main(String[] args)
-	{
-		Game game = new Game();
-		
-		// Check if debug mode enabled
-		if (args.length > 0 && args[0].equals("-d")) {
-			Console.debugEnabled = true;
-			game.console.debug("Starting with debug mode enabled");
-		}
-		
 	}
 	
 	private void AddScene(Scene scene)
