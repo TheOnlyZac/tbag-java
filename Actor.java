@@ -9,7 +9,13 @@ class Actor extends BaseObject {
 	public Actor(String name, String desc, String loc)
 	{
 		super(name, desc, loc);
-		inventory = new Container(String.format("%s's Inventory",this.name()),
-				"a worn leather backpack", "held by " + this.name());
+		this.inventory = new Container(String.format("%s's inventory",this.name()),
+				"a container with " + this.name() + "'s belongings", "held by " + this.name());
+	}
+	
+	public void Pickup(Item item)
+	{
+		this.inventory.add(item);
+		item.location(this.inventory.name());
 	}
 }

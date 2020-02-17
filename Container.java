@@ -66,7 +66,11 @@ class Container extends BaseObject implements Iterable<Item> {
 					item.name(), this.name()));
 			return -1; // operation failed
 		}
-		
+	}
+	
+	public boolean contains(Item item)
+	{
+		return this.contents.contains(item);
 	}
 
 }
