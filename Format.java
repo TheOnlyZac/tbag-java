@@ -18,15 +18,13 @@ final class Format {
 	public static String a(String str)
 	{
 		/** 
-		 * Returns "an [str]" if str starts with a vowel, 
-		 * otherwise returns "a [str]"
+		 * Returns "an" if str starts with a vowel, 
+		 * otherwise returns "a"
 		 */
 		String lowerStr = str.toLowerCase();
-		if (lowerStr.startsWith("a ") || lowerStr.startsWith("an ")) {
-			return str;
-		}
+
 		Character[] vowels = new Character[]{'a', 'e', 'i', 'o', 'u'};
-		return (Arrays.asList(vowels).contains(str.charAt(0)) ? "an " : "a ") + str;
+		return (Arrays.asList(vowels).contains(str.charAt(0)) ? "an " : "a ");
 	}
 	
 	public static String a(BaseObject obj)
