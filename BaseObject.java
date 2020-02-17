@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.concurrent.*;
 
 class BaseObject {
 	/**
@@ -9,7 +10,8 @@ class BaseObject {
 	private String description;
 	private String location;
 	
-	private HashMap<String, Runnable> actions;
+	private HashMap<String, Action> actions;
+	
 
 	// Getters and Setters
 	public String name()
@@ -55,25 +57,17 @@ class BaseObject {
 		this.description = desc;
 		this.location = loc;
 		
-		this.actions = new HashMap<String, Runnable>();
+		this.actions = new HashMap<String, Action>();
 
-		this.addAction("examine", () -> {
-			 System.out.println(String.format("%s: %s %s.",
-					this.name, this.description, this.location));
-		});
-	}
+		
+		AddAction(new Action("examine", new Callable<String>() {
 
-	public BaseObject(String name)
-	{
-		/**
-		 * Initialize a new BaseObject with the given name and a default
-		 * description
-		 * 
-		 * @param name  The name of the object
-		 */
-		this.name = name;
-		this.description = "a thing";
-		this.location = "nearby";
+			@Override
+			public String call() throws Exception {
+				return "test callable";
+			}
+			
+		}));
 	}
 
 	@Override
@@ -82,14 +76,20 @@ class BaseObject {
 		return String.format("%s", this.name);
 	}
 	
-	public void addAction(String name, Runnable action)
+	public void AddAction(Action action)
 	{
-		this.actions.put(name, action);
+		this.actions.put(action.name, action);
 	}
-	
-	public void runAction(String name)
+
+	public String RunAction(String name)
 	{
-		this.actions.get(name).run();
+		try {
+			return this.actions.get(name).run();
+		} catch (Exception exception) {
+			System.out.println("error doing action");
+			return String.format("Exception %s while running action %s in %s",
+					exception.toString(), name, this.name());
+		}
 	}
 
 	/* public void say(String msg)
