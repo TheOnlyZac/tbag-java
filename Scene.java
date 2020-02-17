@@ -22,7 +22,8 @@ public class Scene implements Iterable<BaseObject> {
 	public void setDescription(String desc) { this.description = desc; }
 
 	// default place for new objects with no location
-	public static Scene purgatory = new Scene("Purgatory", "an empty, boundless void");
+	public static Scene purgatory = new Scene("Purgatory",
+			"an empty, boundless void");
 	
 	// Iterator
 	public Iterator<BaseObject> iterator()
@@ -48,7 +49,7 @@ public class Scene implements Iterable<BaseObject> {
 	{
 		/**
 		 * Initialize a new, empty room with the given name, description,
-		 * and color pallette (bg color and fg color)
+		 * and color palliate (bg color and fg color)
 		 * 
 		 * @param name 	The name of the new room
 		 * @param desc	A brief description of the room (not the objects within)
@@ -73,7 +74,6 @@ public class Scene implements Iterable<BaseObject> {
 		 *
 		 * @param obj    Object to remove
 		 */		
-		//System.out.println("Adding " + obj.name() + " to Scene: " + this.getName());
 		if (contents.contains(obj)) {
 			// Object already in room, returning
 			System.out.println("Failed: Scene already contains " + obj.name());
@@ -90,7 +90,6 @@ public class Scene implements Iterable<BaseObject> {
 		 *
 		 * @param obj    Object to remove
 		 */		
-		//System.out.println("Removing " + obj.name() + " from Scene: " + this.getName());
 		if (!(contents.contains(obj))) {
 			// Object not found in room, return
 			System.out.println("Failed: Scene does not contain " + obj.name());
@@ -106,7 +105,7 @@ public class Scene implements Iterable<BaseObject> {
 		 * Code to run when this scene is initially loaded. Generally,
 		 * print the description of the room and it's contents.
 		 * 
-		 * @param c 	Console where to print the intiailzation output
+		 * @param c 	Console where to print the initialization output
 		 */		
 		c.print("You are in ", Format.the(this.getName()),
 				". It is ", Format.a(this.getDescription()), ".");

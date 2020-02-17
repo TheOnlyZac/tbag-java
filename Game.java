@@ -22,7 +22,8 @@ class Game {
 		sceneManager = new SceneManager(console);
 
 		// LOBBY SCENE
-		Scene lobby = new Scene("lobby", "a simple waiting room with beige walls",
+		Scene lobby = new Scene("lobby",
+				"a simple waiting room with beige walls",
 				new Color(245, 245, 220), Color.black);
 
 		Item debugSword = new Item("debug sword",
@@ -69,7 +70,6 @@ class Game {
 			Console.debugEnabled = true;
 			game.console.debug("Starting with debug mode enabled");
 		}
-		Console.debugEnabled = true; // hardcode debugMode enabled
 		
 	}
 	
@@ -84,7 +84,8 @@ class Game {
 	private void AddObject(BaseObject obj)
 	{
 		/**
-		 * Generate a random ID for an object and add it to the game elements array
+		 * Generate a random ID for an object and add it to the game
+		 * elements array
 		 * 
 		 * @param obj 	The object to add
 		 */

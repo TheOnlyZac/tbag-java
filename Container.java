@@ -37,8 +37,8 @@ class Container extends BaseObject implements Iterable<Item> {
 		 * @return 			0 if successful, -1 if failed
 		 */
 				if (this.currWeight + item.size() > this.capacity) {
-			System.out.println(String.format("Error adding %s to %s: Too big for container",
-					item.name(), this.name()));
+			System.out.println(String.format("Error adding %s to %s: "
+					+ "Too big for container", item.name(), this.name()));
 			return -1; // operation failed
 		}
 		
@@ -61,8 +61,8 @@ class Container extends BaseObject implements Iterable<Item> {
 			this.currWeight -= item.size();
 			return 0; // operation completed successfully
 		} catch (ArrayIndexOutOfBoundsException e) {
-			System.out.println(String.format("Error removing %s from %s: Item Not Found",
-					item.name(), this.name()));
+			System.out.println(String.format("Error removing %s from %s: "
+					+ "Item Not Found", item.name(), this.name()));
 			return -1; // operation failed
 		}
 	}

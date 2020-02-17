@@ -56,7 +56,7 @@ class Console extends JFrame {
 		// for each block in the sequence...
 		for (Object b : blocks) {
 			if (b instanceof BaseObject) {
-				// if it is a baseObject, create a new clickable and add it to the panel
+				// if it is a baseObject, create a new Clickable and add it to the panel
 				Clickable c = new Clickable(((BaseObject) b).name(), (BaseObject) b);
 				line.add(c);
 			} else {

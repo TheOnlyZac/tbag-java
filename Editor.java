@@ -78,7 +78,8 @@ public class Editor extends JFrame {
 			this.removeAll();
 			
 			for (Map.Entry<String, String> entry : fields.entrySet()) {
-				this.add(new JLabel(String.format("%s: %s", entry.getKey(), entry.getValue())));
+				this.add(new JLabel(String.format("%s: %s",
+						entry.getKey(), entry.getValue())));
 			}
 			
 		}
