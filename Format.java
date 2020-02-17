@@ -19,10 +19,12 @@ final class Format {
 	{
 		/** 
 		 * Returns "an" if str starts with a vowel, 
-		 * otherwise returns "a"
+		 * "a" if not, and "" if it already starts with a/an
 		 */
 		String lowerStr = str.toLowerCase();
-
+		if (lowerStr.startsWith("a ") || lowerStr.startsWith("an "))
+			return "";
+		
 		Character[] vowels = new Character[]{'a', 'e', 'i', 'o', 'u'};
 		return (Arrays.asList(vowels).contains(str.charAt(0)) ? "an " : "a ");
 	}
@@ -30,8 +32,8 @@ final class Format {
 	public static String a(BaseObject obj)
 	{
 		/**
-		 * Returns "an [name]" if the object's name starts with a vowel, 
-		 * otherwise returns "a [name]"
+		 * Returns "an" if the object's name starts with a vowel, 
+		 * otherwise returns "a"
 		 */
 		return Format.a(obj.name());
 	}
@@ -39,22 +41,23 @@ final class Format {
 	public static String A(String str)
 	{
 		/** 
-		 * Returns "An [str]" if the string starts with a vowel, 
-		 * otherwise returns "A [str]"
+		 * Returns "An" if the string starts with a vowel, 
+		 * otherwise returns "A"
 		 */
 		String aStr = Format.a(str);
-		return aStr.substring(0, 1).toUpperCase() + aStr.substring(1);
+		return aStr.substring(0, 1).toUpperCase();
 	}
 
 	public static String A(BaseObject obj)
 	{
 		/** 
-		 * Returns "An [name]" if the object's name starts with a vowel, 
-		 * otherwise returns "A [name]"
+		 * Returns "An" if the object's name starts with a vowel, 
+		 * otherwise returns "A"
 		 */
 		String aStr = Format.a(obj);
-		return aStr.substring(0, 1).toUpperCase() + aStr.substring(1);
+		return aStr.substring(0, 1).toUpperCase();
 	}
+
 
 
 	public static String say(String speaker, String text)

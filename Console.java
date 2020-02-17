@@ -76,43 +76,94 @@ class Console extends JFrame {
 		revalidate();
 	}
 	
-	public void printf(String fstring, Object... blocks)
+	public void printf(String fstring, BaseObject... blocks)
 	{
-		String[] split = fstring.split("%");
+		/**
+		 * Take a string and substitute each %xy block with the given
+		 * BaseObjects in the blocks sequence formed as below:
+		 * 
+		 * x = the string prefix
+		 * 	a: a/an
+		 * 	t: the
+		 * 	x: no prefix
+		 * 
+		 * y = formatted version of the block
+		 * 	n: name of the given BaseObject
+		 * 	d: description of the given BaseObject
+		 * 
+		 * @param fstring 	The string to format
+		 * @param blocks 	The BaseObjects to insert int the string
+		 */
+		String[] split = fstring.split("%"); // split string at % delimiter
 		
+		if (blocks.length != split.length - 1) {
+			// if the number of delimiters != the number of blocks,
+			// default to printing the unformatted string
+			this.debug("Cannot format string, sub and block count mismatch");
+			this.print(fstring);
+		}
+		
+		// create a new JPanel for the new line of text
 		JPanel line = new JPanel();
 		line.setLayout(new BoxLayout(line, BoxLayout.X_AXIS));
 		line.setAlignmentX(Component.LEFT_ALIGNMENT);
 		
-		Clickable c;
-		int i = 0;
-		int j = 0;
+		Clickable c; // new clickable to insert into the line
+		int i = 0; // current block counter
+		int j = 0; // loop counter
+		
 		for (String s : split) {
+			// always insert the first split string as a label, no clickable
 			if (j == 0) {
 				line.add(new JLabel(s));
 				j++;
 				continue;
 			}
 			
-			BaseObject curr = (BaseObject) blocks[i];
+			// store the current BaseObject as curr
+			BaseObject curr = blocks[i];
 			
-			String partA = s.substring(0, 1);
-			String partB = s.substring(1);
+			String partA = s.substring(0, 2); // part a = substitution
+			String partB = s.substring(2); // part b = the string following
+			String prefix; // a/an/the
+			String title; // name/description
 			
+			// substitute the title
+			switch(partA.charAt(1)) {
+				case 'n':
+					title = curr.name();
+					break;
+				case 'd':
+					title = curr.description();
+					break;
+				default:
+					title = curr.name();
+					break;
+			};
+			
+			// substitute the prefix
 			switch(partA.charAt(0)) {
 				case 'a':
-					c = new Clickable(Format.a(curr.name()), curr);
+					prefix = Format.a(title) + " ";
 					break;
-				case 'o':
-					c = new Clickable(curr.name(), curr);
+				case 't':
+					prefix = "the ";
+					break;
+				case 'x':
+					prefix = "";
+					break;
 				default:
-					c = new Clickable(curr.name(), curr);
+					prefix = "";
 					break;
-			}
+			};
+			
+			c = new Clickable(prefix + title, curr);
+			
 			line.add(c);
 			line.add(new JLabel(partB));
-			i++;
-			j++;
+			
+			i++; // increment block counter
+			j++; // increment loop counter
 		}
 		
 		textPanel.add(line);
