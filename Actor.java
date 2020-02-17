@@ -10,7 +10,7 @@ class Actor extends BaseObject {
 	{
 		super(name, desc, loc);
 		this.inventory = new Container(String.format("%s's inventory",
-				this.name()), "a container with " + this.name()
+				this.name()), "an inventory", "a container with " + this.name()
 				+ "'s belongings", "held by " + this.name(), 10);
 	}
 	
@@ -38,6 +38,6 @@ class Actor extends BaseObject {
 	public void examine(Console c)
 	{
     	c.printf("That is %xn, %as %xs.",
-    			this, this.description(), this.location());
+    			this, this.shortDesc(), this.location());
 	}
 }

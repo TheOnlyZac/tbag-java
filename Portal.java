@@ -7,9 +7,9 @@ public class Portal extends BaseObject {
 	
 	Scene sceneLink;
 	
-	public Portal(String name, String desc, String loc, Scene scene)
+	public Portal(String name, String shortDesc, String longDesc, String loc, Scene scene)
 	{
-		super(name, desc, loc);
+		super(name, shortDesc, longDesc, loc);
 		sceneLink = scene;
 	}
 	

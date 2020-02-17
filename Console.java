@@ -45,9 +45,6 @@ class Console extends JFrame {
 		 */		
 		// Create a new JPanel for the new line of text output
 		JPanel line = new JPanel();
-		line.setLayout(new BoxLayout(line, BoxLayout.X_AXIS));
-		line.setAlignmentX(Component.LEFT_ALIGNMENT);
-		//textPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		
 		// for each block in the sequence...
 		for (Object b : blocks) {
@@ -65,9 +62,24 @@ class Console extends JFrame {
 			}
 		}
 		
+		print(line);
+	}
+	
+	public void print(JPanel line)
+	{
+		/**
+		 * Format and the given line JPanel to the textPanel.
+		 * Called by print(), printf(), and debug() to add lines of text
+		 * to the console in uniform style.
+		 * 
+		 * @param line 	The line of text to print
+		 */
+		line.setLayout(new BoxLayout(line, BoxLayout.X_AXIS));
+		line.setAlignmentX(Component.LEFT_ALIGNMENT);
+		line.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
 		textPanel.add(line);
-		
 		revalidate();
+		
 	}
 	
 	public void printf(String fstring, Object... blocks)
@@ -100,9 +112,6 @@ class Console extends JFrame {
 		
 		// create a new JPanel for the new line of text
 		JPanel line = new JPanel();
-		line.setLayout(new BoxLayout(line, BoxLayout.X_AXIS));
-		line.setAlignmentX(Component.LEFT_ALIGNMENT);
-		//line.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
 		int i = 0; // current block counter
 		int j = 0; // loop counter
@@ -142,7 +151,7 @@ class Console extends JFrame {
 					c = new Clickable(this, post, curr);
 					break;
 				case 'd':
-					post = Format.stripPrefix(curr.description());
+					post = Format.stripPrefix(curr.shortDesc());
 					c = new Clickable(this, post, curr);
 					break;
 				case 'l':
@@ -177,8 +186,7 @@ class Console extends JFrame {
 			j++; // increment loop counter
 		}
 		
-		textPanel.add(line);
-		revalidate();
+		print(line);
 	}
 	
 	public void debug(String text)

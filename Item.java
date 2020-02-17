@@ -5,9 +5,9 @@ class Item extends BaseObject {
 	
 	private int size;
 
-	public Item(String name, String desc, String loc, int size)
+	public Item(String name, String shortDesc, String longDesc, String loc, int size)
 	{
-		super(name, desc, loc);
+		super(name, shortDesc, longDesc, loc);
 
 		this.size = size;
 	}

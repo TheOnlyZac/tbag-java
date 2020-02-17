@@ -67,7 +67,7 @@ public class Editor extends JFrame {
 
 			fields.put("Type", String.format("%s", obj.getClass()));
 			fields.put("Name", obj.name());
-			fields.put("Description", obj.description());
+			fields.put("Description", obj.shortDesc());
 			fields.put("Location", obj.location());
 			
 			DrawFields();

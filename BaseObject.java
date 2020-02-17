@@ -7,8 +7,10 @@ class BaseObject {
 	 */
 
 	private String name;
-	private String description;
-	private String location;	
+	private String shortDesc;
+	private String longDesc;
+	private String location;
+	private String flavorText = null;
 
 	// Getters and Setters
 	public String name()
@@ -21,14 +23,24 @@ class BaseObject {
 		this.name = n;
 	}
 
-	public String description()
+	public String shortDesc()
 	{
-		return this.description;
+		return this.shortDesc;
 	}
 
-	public void description(String desc)
+	public void shortDesc(String desc)
 	{
-		this.description = desc;
+		this.shortDesc = desc;
+	}
+	
+	public String longDesc()
+	{
+		return this.longDesc;
+	}
+	
+	public void longDesc(String desc)
+	{
+		this.longDesc = desc;
 	}
 
 	public String location()
@@ -40,18 +52,42 @@ class BaseObject {
 	{
 		this.location = loc;
 	}
+	public String flavorText()
+	{
+		return this.flavorText;
+	}
+	public void flavorText(String txt)
+	{
+		this.flavorText = txt;
+	}
 
 	public BaseObject(String name, String desc, String loc)
 	{
 		/**
-		 * Initialize a new BaseObject with the given name and description.
+		 * Initialize a new BaseObject with the given name and shortDesc.
 		 * 
 		 * @param name 	The name of the object
-		 * @param desc 	A brief description of the object
-		 * @param loc	A description of where the object is in space
+		 * @param desc 	A brief shortDesc of the object
+		 * @param loc	A shortDesc of where the object is in space
 		 */
 		this.name = name;
-		this.description = desc;
+		this.shortDesc = desc;
+		this.longDesc = desc;
+		this.location = loc;
+	}
+
+	public BaseObject(String name, String shortd, String longd, String loc)
+	{
+		/**
+		 * Initialize a new BaseObject with the given name and shortDesc.
+		 * 
+		 * @param name 	The name of the object
+		 * @param desc 	A brief shortDesc of the object
+		 * @param loc	A shortDesc of where the object is in space
+		 */
+		this.name = name;
+		this.shortDesc = shortd;
+		this.longDesc = longd;
 		this.location = loc;
 	}
 
@@ -64,7 +100,9 @@ class BaseObject {
 	public void examine(Console c)
 	{
     	c.printf("%tn is %as %xs.",
-    			this, this.description(), this.location());
+    			this, this.longDesc(), this.location());
+    	if (this.flavorText != null)
+    		c.printf(flavorText);
 	}
 
 	/* public void say(String msg)

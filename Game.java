@@ -44,13 +44,16 @@ class Game {
 				new Color(245, 245, 220), Color.black);
 
 		Item debugSword = new Item("debug sword",
-			"a mysterious sword made of light", "on the table", 4);
+			"a sword", "a mysterious sword made of light",
+			"on the table", 4);
+		debugSword.flavorText("It radiates power, and draws you towards it");
 
 		Actor debugActor = new Actor("Alcyonis",
 				"a night elf", "standing by the table");
 		
 		Container table = new Container("table",
-				"a mahogany table", "on the floor", 100);
+				"a wooden table", "an extragavant mahogany table",
+				"on the floor", 100);
 		
 		lobby.addObject(table);
 		table.addObject(debugSword);
@@ -62,17 +65,21 @@ class Game {
 				Color.DARK_GRAY, Color.white);		
 		
 		Item papers = new Item("Papers",
-				"a stack of paperwork", "on the desk", 1);
+				"some papers", "a tall stack of paperwork",
+				"on the desk", 1);
 		
 		Container desk = new Container("desk",
-				"a wooden desk", "on the far side of the room", 50);
+				"a wooden desk", "a mahogany office desk with two drawers",
+				"on the far side of the room", 50);
 		
 		office.addObject(papers);
 		office.addObject(desk);
 		AddScene(office);
 		
 		Portal door = new Portal("door",
-				"an office door", "on the south wall", office);
+				"a wooden door", "a wooden office door with frosted glass",
+				"on the south wall", office);
+		door.flavorText("It probably leads into the Director's office");
 
 		lobby.addObject(door);
 		sceneManager.loadScene(lobby);
