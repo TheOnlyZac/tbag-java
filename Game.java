@@ -36,9 +36,11 @@ class Game {
 		lobby.addObject(debugActor);
 		AddScene(lobby);
 
-		console.print(debugActor, " says, 'It's dangerous to go alone. Take this!'");
-		console.print(debugActor, " gestures to ",
-				Format.a(debugSword.description()), " on the table");
+		//console.print(debugActor, " says, 'It's dangerous to go alone. Take this!'");
+		//console.print(debugActor, " gestures to ",
+				//Format.a(debugSword.description()), " on the table");
+		console.printf("%o says, 'there's %a on the table!'",
+				debugActor, debugSword);
 		
 		// OFFICE SCENE
 		Scene office = new Scene("Office", "a dimly lit office workspace");		

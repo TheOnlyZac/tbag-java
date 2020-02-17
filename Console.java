@@ -3,6 +3,7 @@ import javax.swing.*;
 import javafx.scene.layout.Border;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 class Console extends JFrame {
 	/**
@@ -58,7 +59,7 @@ class Console extends JFrame {
 		for (Object b : blocks) {
 			if (b instanceof BaseObject) {
 				// if it is a baseObject, create a new clickable and add it to the panel
-				Clickable c = new Clickable((BaseObject) b);
+				Clickable c = new Clickable(((BaseObject) b).name(), (BaseObject) b);
 				line.add(c);
 			} else {
 				// if it is anything else, simply add it as a string on a JLabel
@@ -72,6 +73,49 @@ class Console extends JFrame {
 		
 		textPanel.add(line);
 		
+		revalidate();
+	}
+	
+	public void printf(String fstring, Object... blocks)
+	{
+		String[] split = fstring.split("%");
+		
+		JPanel line = new JPanel();
+		line.setLayout(new BoxLayout(line, BoxLayout.X_AXIS));
+		line.setAlignmentX(Component.LEFT_ALIGNMENT);
+		
+		Clickable c;
+		int i = 0;
+		int j = 0;
+		for (String s : split) {
+			if (j == 0) {
+				line.add(new JLabel(s));
+				j++;
+				continue;
+			}
+			
+			BaseObject curr = (BaseObject) blocks[i];
+			
+			String partA = s.substring(0, 1);
+			String partB = s.substring(1);
+			
+			switch(partA.charAt(0)) {
+				case 'a':
+					c = new Clickable(Format.a(curr.name()), curr);
+					break;
+				case 'o':
+					c = new Clickable(curr.name(), curr);
+				default:
+					c = new Clickable(curr.name(), curr);
+					break;
+			}
+			line.add(c);
+			line.add(new JLabel(partB));
+			i++;
+			j++;
+		}
+		
+		textPanel.add(line);
 		revalidate();
 	}
 	
