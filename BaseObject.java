@@ -8,10 +8,7 @@ class BaseObject {
 
 	private String name;
 	private String description;
-	private String location;
-	
-	private HashMap<String, Action> actions;
-	
+	private String location;	
 
 	// Getters and Setters
 	public String name()
@@ -56,50 +53,12 @@ class BaseObject {
 		this.name = name;
 		this.description = desc;
 		this.location = loc;
-		
-		this.actions = new HashMap<String, Action>();
-
-		
-		AddAction(new Action("examine", new Callable<String>() {
-
-			@Override
-			public String call() throws Exception {
-				return "test callable";
-			}
-			
-		}));
 	}
 
 	@Override
 	public String toString()
 	{
 		return String.format("%s", this.name);
-	}
-	
-	public void AddAction(Action action)
-	{
-		/**
-		 * Add the given action to the list of the Object's possible actions.
-		 * 
-		 * @param action 	The action to be stored in the actions array
-		 */
-		this.actions.put(action.name, action);
-	}
-
-	public String RunAction(String name)
-	{
-		/**
-		 * Run the action stored under the given name in the actions array.
-		 * 
-		 * @param name 	The name of the action to be run
-		 */
-		try {
-			return this.actions.get(name).run();
-		} catch (Exception exception) {
-			System.out.println("error doing action");
-			return String.format("Exception %s while running action %s in %s",
-					exception.toString(), name, this.name());
-		}
 	}
 
 	/* public void say(String msg)

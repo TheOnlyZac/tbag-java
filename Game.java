@@ -32,22 +32,17 @@ class Game {
 		Actor debugActor = new Actor("Alcyonis",
 				"a night elf", "standing by the table");
 		
-		Container table = new Container ("Table",
+		Container table = new Container("table",
 				"a mahogany table", "on the floor", 100);
-
+		
 		lobby.addObject(table);
 		table.addObject(debugSword);
 		lobby.addObject(debugActor);
 		AddScene(lobby);
-		sceneManager.loadScene(lobby);
-
-		console.printf("%xn says, \"It's dangerous to go alone, take this!\"",
-				debugActor);
-		console.printf("%xn gestures to %tn on the table.",
-				debugActor, debugSword);
 		
 		// OFFICE SCENE
-		Scene office = new Scene("Office", "a dimly lit office workspace");		
+		Scene office = new Scene("office", "a dimly lit workspace",
+				Color.DARK_GRAY, Color.white);		
 		
 		Item papers = new Item("Papers",
 				"a stack of paperwork", "on the desk", 1);
@@ -58,6 +53,18 @@ class Game {
 		office.addObject(papers);
 		office.addObject(desk);
 		AddScene(office);
+		
+		Portal door = new Portal("door", "an office door",
+				"on the south wall", office);
+
+		lobby.addObject(door);
+		sceneManager.loadScene(lobby);
+
+		console.printf("%xn says, \"It's dangerous to go alone, take this!\"",
+				debugActor);
+		console.printf("%xn gestures to %tn on the table.",
+				debugActor, debugSword);
+		//sceneManager.loadScene(office);
 
 	}
 

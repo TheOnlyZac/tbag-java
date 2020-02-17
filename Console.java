@@ -1,9 +1,5 @@
 import javax.swing.*;
-
-import javafx.scene.layout.Border;
-
 import java.awt.*;
-import java.util.ArrayList;
 
 class Console extends JFrame {
 	/**
@@ -88,6 +84,7 @@ class Console extends JFrame {
 		 * y = formatted version of the object
 		 * 	n: name of the given object
 		 * 	d: description of the given object
+		 * 	l: location of the given object
 		 * 
 		 * @param fstring 	The string to format
 		 * @param blocks 	The BaseObjects to insert int the string
@@ -135,6 +132,9 @@ class Console extends JFrame {
 					break;
 				case 'd':
 					title = curr.description();
+					break;
+				case 'l':
+					title = curr.location();
 					break;
 				default:
 					title = curr.name();

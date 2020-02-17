@@ -50,7 +50,7 @@ public class Editor extends JFrame {
 	// Inspector subclass
 	private class Inspector extends JPanel {
 		
-		private BaseObject focus;
+		BaseObject focus;
 		private Map<String, String> fields;
 		
 		public Inspector()
@@ -71,6 +71,7 @@ public class Editor extends JFrame {
 			fields.put("Location", obj.location());
 			
 			DrawFields();
+			revalidate();
 		}
 		
 		private void DrawFields()
