@@ -215,14 +215,23 @@ public class Editor extends JFrame {
 				objNode.setUserObject(obj);
 				rNode.add(objNode);
 				
-				// if the obj is a container, loop again
-				/*if (obj instanceof java.lang.Iterable) {
-					for (BaseObject content : obj) {
-						DefaultMutableTreeNode cNode = new DefaultMutableTreeNode(content.name());
-						cNode.setUserObject(content);
+				// if the obj is a container, loop its contents
+				if (obj instanceof Container) {
+					for (Item item : (Container) obj) {
+						DefaultMutableTreeNode cNode = new DefaultMutableTreeNode(item.name());
+						cNode.setUserObject(item);
 						objNode.add(cNode);
 					}
-				}*/
+				}
+				
+				// if the obj is an actor, loop their inventory
+				if (obj instanceof Actor) {
+					for (Item item : (Container) ((Actor) obj).inventory) {
+						DefaultMutableTreeNode cNode = new DefaultMutableTreeNode(item.name());
+						cNode.setUserObject(item);
+						objNode.add(cNode);
+					}
+				}
 			}
 		}
 

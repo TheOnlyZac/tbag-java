@@ -4,14 +4,14 @@ class Actor extends BaseObject {
 	 * actors.
 	 */
 
-	private Container inventory;
+	public Container inventory;
 
 	public Actor(String name, String desc, String loc)
 	{
 		super(name, desc, loc);
 		this.inventory = new Container(String.format("%s's inventory",
 				this.name()), "a container with " + this.name()
-				+ "'s belongings", "held by " + this.name());
+				+ "'s belongings", "held by " + this.name(), 10);
 	}
 	
 	public void Pickup(Item item)

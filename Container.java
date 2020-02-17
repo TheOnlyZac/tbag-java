@@ -16,12 +16,13 @@ class Container extends BaseObject implements Iterable<Item> {
 		return this.contents.iterator();
 	}
 	
-	public Container(String name, String desc, String loc)
+	public Container(String name, String desc, String loc, Integer cap)
 	{
 		/**
 		 * Initialize a new empty container
 		 */
 		super(name, desc, loc);
+		this.capacity = cap;
 		this.contents = new ArrayList<Item>();
 	}
 	

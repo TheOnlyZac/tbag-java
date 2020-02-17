@@ -33,7 +33,7 @@ class Game {
 				"a night elf", "standing by the table");
 		
 		Container table = new Container ("Table",
-				"a mahogany table", "on the floor");
+				"a mahogany table", "on the floor", 100);
 
 		lobby.addObject(table);
 		table.addObject(debugSword);
@@ -47,17 +47,17 @@ class Game {
 				debugActor, debugSword);
 		
 		// OFFICE SCENE
-		/* Scene office = new Scene("Office", "a dimly lit office workspace");		
+		Scene office = new Scene("Office", "a dimly lit office workspace");		
 		
 		Item papers = new Item("Papers",
 				"a stack of paperwork", "on the desk", 1);
 		
 		Container desk = new Container("desk",
-				"a simple wooden desk", "on the far side of the room");
+				"a simple wooden desk", "on the far side of the room", 50);
 		
 		office.addObject(papers);
 		office.addObject(desk);
-		AddScene(office); */
+		AddScene(office);
 
 	}
 
