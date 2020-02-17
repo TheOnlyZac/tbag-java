@@ -76,7 +76,7 @@ class Console extends JFrame {
 		 */
 		line.setLayout(new BoxLayout(line, BoxLayout.X_AXIS));
 		line.setAlignmentX(Component.LEFT_ALIGNMENT);
-		line.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
+		line.setBorder(BorderFactory.createEmptyBorder(3, 0, 3, 0));
 		textPanel.add(line);
 		revalidate();
 		
