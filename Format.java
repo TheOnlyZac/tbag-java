@@ -58,7 +58,17 @@ final class Format {
 		return aStr.substring(0, 1).toUpperCase();
 	}
 
-
+	public static String the(String str)
+	{
+		/**
+		 * Returns "the [str] or "The [str]" if the string doesn't
+		 * already start the "the". Otherwise, returns the string as is.
+		 */
+		if (str.startsWith("the ")) return str;
+		else if (str.startsWith("The ")) return str;
+		else if (str.toLowerCase().charAt(0) == str.charAt(0)) return "the " + str;
+		else return "The " + str.toLowerCase();
+	}
 
 	public static String say(String speaker, String text)
 	{

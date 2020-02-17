@@ -1,4 +1,5 @@
 import java.util.Iterator;
+import java.awt.Color;
 import java.util.ArrayList;
 
 public class Scene implements Iterable<BaseObject> {
@@ -9,6 +10,9 @@ public class Scene implements Iterable<BaseObject> {
 	private String name;
 	private String description;
 	private ArrayList<BaseObject> contents;
+	
+	public Color backgroundColor = Color.BLACK;
+	public Color foregroundColor = Color.WHITE;
 
 	// GETTERS and SETTERS
 	public String getName()	{ return name; }
@@ -33,11 +37,29 @@ public class Scene implements Iterable<BaseObject> {
 		 * Initialize a new, empty room with the given name and description
 		 * 
 		 * @param name 	The name of the new room
+		 * @param desc	A brief description of the room (not the objects within)
 		 */
 		this.name = _name;
 		this.description = _desc;
 		this.contents = new ArrayList<BaseObject>();
 	 }
+	
+	public Scene(String _name, String _desc, Color bgColor, Color fgColor)
+	{
+		/**
+		 * Initialize a new, empty room with the given name, description,
+		 * and color pallette (bg color and fg color)
+		 * 
+		 * @param name 	The name of the new room
+		 * @param desc	A brief description of the room (not the objects within)
+		 */
+		this.name = _name;
+		this.description = _desc;
+		this.contents = new ArrayList<BaseObject>();
+		
+		this.backgroundColor = bgColor;
+		this.foregroundColor = fgColor;		
+	}
 
 	public String toString()
 	{
@@ -76,5 +98,24 @@ public class Scene implements Iterable<BaseObject> {
 		}
 		this.contents.remove(obj);
 		//Console.debug("Successfully removed from Scene");
+	}
+	
+	public void OnLoad(Console c)
+	{
+		c.print("You are in ", Format.the(this.getName()),
+				". It is ", Format.a(this.getDescription()),
+				this.getDescription(), ".");
+		this.LookAround(c);
+	}
+	
+	public void LookAround(Console c)
+	{
+		String result = "Looking around, you can see ";
+		
+		for (int i = 0; i < contents.size(); i++) {
+			if (i == contents.size() - 1) result += " and %ad.";
+			else result += "%ad, ";
+		}
+		c.printf(result, contents.toArray(new BaseObject[contents.size()]));
 	}
 }

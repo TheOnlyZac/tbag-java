@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,19 +11,21 @@ class Game {
 	
 	public Map<Integer, BaseObject> elements; // maps all objects in the game to unique IDs
 	public ArrayList<Scene> scenes; // stores all the scenes in the game
-	
 	public Console console;
+	private SceneManager sceneManager;
 	
 	public Game()
 	{
 		elements = new HashMap<Integer, BaseObject>();
-		scenes = new ArrayList<Scene>();
 		console = new Console();
+		scenes = new ArrayList<Scene>();
+		sceneManager = new SceneManager(console);
 
 		// LOBBY SCENE
-		Scene lobby = new Scene("Lobby", "a simple waiting room with beige walls");
+		Scene lobby = new Scene("lobby", "a simple waiting room with beige walls",
+				new Color(245, 245, 220), Color.black);
 
-		Item debugSword = new Item("Debug Sword",
+		Item debugSword = new Item("debug sword",
 			"a mysterious sword made of light", "on the table", 4);
 
 		Actor debugActor = new Actor("Alcyonis",
@@ -35,14 +38,15 @@ class Game {
 		lobby.addObject(debugSword);
 		lobby.addObject(debugActor);
 		AddScene(lobby);
+		sceneManager.loadScene(lobby);
 
 		console.printf("%xn says, \"It's dangerous to go alone, take this!\"",
 				debugActor);
-		console.printf("%xn gestures to %ad on the table.'",
+		console.printf("%xn gestures to %tn on the table.'",
 				debugActor, debugSword);
 		
 		// OFFICE SCENE
-		Scene office = new Scene("Office", "a dimly lit office workspace");		
+		/* Scene office = new Scene("Office", "a dimly lit office workspace");		
 		
 		Item papers = new Item("Papers",
 				"a stack of paperwork", "on the desk", 1);
@@ -52,7 +56,7 @@ class Game {
 		
 		office.addObject(papers);
 		office.addObject(desk);
-		AddScene(office);
+		AddScene(office); */
 
 	}
 

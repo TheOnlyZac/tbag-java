@@ -10,7 +10,7 @@ class Console extends JFrame {
 	 * The Console handles writing text to the screen.
 	 */
 	
-	public static Boolean debugEnabled = true;
+	public static Boolean debugEnabled = false;
 	
 	private JPanel textPanel;
 
@@ -24,15 +24,15 @@ class Console extends JFrame {
 		// Create JFrame
 		setTitle("TBAG Console");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(500, 400);
+		setSize(700, 400);
 		
 		textPanel = new JPanel();
 		
-		BoxLayout boxLayout = new BoxLayout(textPanel, BoxLayout.Y_AXIS);
-		textPanel.setLayout(boxLayout);
+		textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
+		textPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		textPanel.setBackground(new Color(0,0,0,0));
 		getContentPane().add(textPanel);
 		
-		//textPanel.setBackground(Color.BLACK);
 		setVisible(true);
 		
 		debug("Initialized new console (debug mode enabled).");
@@ -52,8 +52,7 @@ class Console extends JFrame {
 		JPanel line = new JPanel();
 		line.setLayout(new BoxLayout(line, BoxLayout.X_AXIS));
 		line.setAlignmentX(Component.LEFT_ALIGNMENT);
-		//line.setBorder(BorderFactory.createLineBorder(Color.black));
-		//line.setBackground(Color.black);
+		//textPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		
 		// for each block in the sequence...
 		for (Object b : blocks) {
@@ -107,6 +106,8 @@ class Console extends JFrame {
 		JPanel line = new JPanel();
 		line.setLayout(new BoxLayout(line, BoxLayout.X_AXIS));
 		line.setAlignmentX(Component.LEFT_ALIGNMENT);
+		//line.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
 		
 		Clickable c; // new clickable to insert into the line
 		int i = 0; // current block counter
@@ -115,7 +116,7 @@ class Console extends JFrame {
 		for (String s : split) {
 			// always insert the first split string as a label, no clickable
 			if (j == 0) {
-				line.add(new JLabel(s));
+				if (s.length() != 0) line.add(new JLabel(s));
 				j++;
 				continue;
 			}
@@ -158,6 +159,7 @@ class Console extends JFrame {
 			};
 			
 			c = new Clickable(prefix + title, curr);
+			//c.setBorder(BorderFactory.createLineBorder(Color.black));
 			
 			line.add(c);
 			line.add(new JLabel(partB));
