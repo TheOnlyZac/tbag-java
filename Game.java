@@ -36,7 +36,7 @@ class Game {
 		lobby.addObject(debugActor);
 		AddScene(lobby);
 
-		console.print(Format.say(debugActor.name(), "It's dangerous to go alone. Take this!"));
+		console.print(debugActor, " says, 'It's dangerous to go alone. Take this!'");
 		console.print(debugActor, " gestures to ",
 				Format.a(debugSword.description()), " on the table");
 		

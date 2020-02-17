@@ -1,4 +1,7 @@
 import javax.swing.*;
+
+import javafx.scene.layout.Border;
+
 import java.awt.*;
 
 class Console extends JFrame {
@@ -28,7 +31,7 @@ class Console extends JFrame {
 		textPanel.setLayout(boxLayout);
 		getContentPane().add(textPanel);
 		
-		textPanel.setBackground(Color.BLACK);
+		//textPanel.setBackground(Color.BLACK);
 		setVisible(true);
 		
 		debug("Initialized new console (debug mode enabled).");
@@ -43,17 +46,32 @@ class Console extends JFrame {
 		 * 
 		 * @param blocks  The elements that compose the string
 		 */
-		String s = "";
+		
+		// Create a new JPanel for the new line of text output
+		JPanel line = new JPanel();
+		line.setLayout(new BoxLayout(line, BoxLayout.X_AXIS));
+		line.setAlignmentX(Component.LEFT_ALIGNMENT);
+		//line.setBorder(BorderFactory.createLineBorder(Color.black));
+		//line.setBackground(Color.black);
+		
+		// for each block in the sequence...
 		for (Object b : blocks) {
-			s += b.toString();
+			if (b instanceof BaseObject) {
+				// if it is a baseObject, create a new clickable and add it to the panel
+				Clickable c = new Clickable((BaseObject) b);
+				line.add(c);
+			} else {
+				// if it is anything else, simply add it as a string on a JLabel
+				JLabel label = new JLabel();
+				//label.setForeground(Color.white);
+				label.setText(b.toString());
+				
+				line.add(label);
+			}
 		}
-		System.out.println(s);
 		
-		JLabel label = new JLabel();
-		label.setText(s);
-		label.setForeground(Color.white);
+		textPanel.add(line);
 		
-		textPanel.add(label);
 		revalidate();
 	}
 	

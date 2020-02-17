@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 class BaseObject {
 	/**
 	 * BaseObject is the primitive for all object types in the game
@@ -7,7 +9,7 @@ class BaseObject {
 	private String description;
 	private String location;
 	
-	private Scene scene;
+	private HashMap<String, Runnable> actions;
 
 	// Getters and Setters
 	public String name()
@@ -52,6 +54,13 @@ class BaseObject {
 		this.name = name;
 		this.description = desc;
 		this.location = loc;
+		
+		this.actions = new HashMap<String, Runnable>();
+
+		this.addAction("examine", () -> {
+			 System.out.println(String.format("%s: %s %s.",
+					this.name, this.description, this.location));
+		});
 	}
 
 	public BaseObject(String name)
@@ -71,6 +80,16 @@ class BaseObject {
 	public String toString()
 	{
 		return String.format("%s", this.name);
+	}
+	
+	public void addAction(String name, Runnable action)
+	{
+		this.actions.put(name, action);
+	}
+	
+	public void runAction(String name)
+	{
+		this.actions.get(name).run();
 	}
 
 	/* public void say(String msg)
