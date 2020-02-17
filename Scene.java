@@ -38,7 +38,7 @@ public class Scene implements Iterable<BaseObject> {
 		 * 
 		 * @param name 	The name of the new room
 		 * @param desc	A brief description of the room (not the objects within)
-		 */
+		 */		
 		this.name = _name;
 		this.description = _desc;
 		this.contents = new ArrayList<BaseObject>();
@@ -52,7 +52,7 @@ public class Scene implements Iterable<BaseObject> {
 		 * 
 		 * @param name 	The name of the new room
 		 * @param desc	A brief description of the room (not the objects within)
-		 */
+		 */		
 		this.name = _name;
 		this.description = _desc;
 		this.contents = new ArrayList<BaseObject>();
@@ -72,7 +72,7 @@ public class Scene implements Iterable<BaseObject> {
 		 * Add an object to the room. Fails if it's already present.
 		 *
 		 * @param obj    Object to remove
-		 */
+		 */		
 		//System.out.println("Adding " + obj.name() + " to Scene: " + this.getName());
 		if (contents.contains(obj)) {
 			// Object already in room, returning
@@ -89,7 +89,7 @@ public class Scene implements Iterable<BaseObject> {
 		 * Remove an object form the room. Fails if it's not present.
 		 *
 		 * @param obj    Object to remove
-		 */
+		 */		
 		//System.out.println("Removing " + obj.name() + " from Scene: " + this.getName());
 		if (!(contents.contains(obj))) {
 			// Object not found in room, return
@@ -102,18 +102,29 @@ public class Scene implements Iterable<BaseObject> {
 	
 	public void OnLoad(Console c)
 	{
+		/**
+		 * Code to run when this scene is initially loaded. Generally,
+		 * print the description of the room and it's contents.
+		 * 
+		 * @param c 	Console where to print the intiailzation output
+		 */		
 		c.print("You are in ", Format.the(this.getName()),
-				". It is ", Format.a(this.getDescription()),
-				this.getDescription(), ".");
+				". It is ", Format.a(this.getDescription()), ".");
 		this.LookAround(c);
 	}
 	
 	public void LookAround(Console c)
 	{
+		/**
+		 * Print out the contents of the room by their descriptions.
+		 * 
+		 * @param c 	Console where to print the list
+		 */		
 		String result = "Looking around, you can see ";
 		
 		for (int i = 0; i < contents.size(); i++) {
 			if (i == contents.size() - 1) result += " and %ad.";
+			else if (contents.size() == 2) result += "%ad ";
 			else result += "%ad, ";
 		}
 		c.printf(result, contents.toArray(new BaseObject[contents.size()]));

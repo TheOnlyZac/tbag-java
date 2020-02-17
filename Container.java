@@ -25,7 +25,7 @@ class Container extends BaseObject implements Iterable<Item> {
 		this.contents = new ArrayList<Item>();
 	}
 	
-	public int add(Item item)
+	public int addObject(Item item)
 	{
 		/**
 		 * Insert the given item into the container if there is room for it.
@@ -36,8 +36,7 @@ class Container extends BaseObject implements Iterable<Item> {
 		 * @param 	item 	The item to be added
 		 * @return 			0 if successful, -1 if failed
 		 */
-		
-		if (this.currWeight + item.size() > this.capacity) {
+				if (this.currWeight + item.size() > this.capacity) {
 			System.out.println(String.format("Error adding %s to %s: Too big for container",
 					item.name(), this.name()));
 			return -1; // operation failed
@@ -48,7 +47,7 @@ class Container extends BaseObject implements Iterable<Item> {
 		return 0; // operation completed successfully
 	}
 	
-	public int remove(Item item)
+	public int removeObject(Item item)
 	{
 		/**
 		 * Attempt to remove the given item from this container. If the item
@@ -70,6 +69,12 @@ class Container extends BaseObject implements Iterable<Item> {
 	
 	public boolean contains(Item item)
 	{
+		/**
+		 * Check if the container contains the given item.
+		 * 
+		 * @param item 	The Item to check
+		 * @return 		True or False
+		 */
 		return this.contents.contains(item);
 	}
 

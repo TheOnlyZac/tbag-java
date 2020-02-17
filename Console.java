@@ -20,7 +20,7 @@ class Console extends JFrame {
 		 * Initialize a new Console instance.
 		 * 
 		 * @param d     Debug mode enabled?
-		 */
+		 */		
 		// Create JFrame
 		setTitle("TBAG Console");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,8 +46,7 @@ class Console extends JFrame {
 		 * in order.
 		 * 
 		 * @param blocks  The elements that compose the string
-		 */
-		
+		 */		
 		// Create a new JPanel for the new line of text output
 		JPanel line = new JPanel();
 		line.setLayout(new BoxLayout(line, BoxLayout.X_AXIS));
@@ -86,13 +85,13 @@ class Console extends JFrame {
 		 * 	t: the
 		 * 	x: no prefix
 		 * 
-		 * y = formatted version of the block
-		 * 	n: name of the given BaseObject
-		 * 	d: description of the given BaseObject
+		 * y = formatted version of the object
+		 * 	n: name of the given object
+		 * 	d: description of the given object
 		 * 
 		 * @param fstring 	The string to format
 		 * @param blocks 	The BaseObjects to insert int the string
-		 */
+		 */		
 		String[] split = fstring.split("%"); // split string at % delimiter
 		
 		if (blocks.length != split.length - 1) {
@@ -126,8 +125,8 @@ class Console extends JFrame {
 			
 			String partA = s.substring(0, 2); // part a = substitution
 			String partB = s.substring(2); // part b = the string following
-			String prefix; // a/an/the
-			String title; // name/description
+			String sub; //
+			String title; //
 			
 			// substitute the title
 			switch(partA.charAt(1)) {
@@ -145,20 +144,20 @@ class Console extends JFrame {
 			// substitute the prefix
 			switch(partA.charAt(0)) {
 				case 'a':
-					prefix = Format.a(title) + " ";
+					sub = Format.a(title);
 					break;
 				case 't':
-					prefix = "the ";
+					sub = Format.the(title);
 					break;
 				case 'x':
-					prefix = "";
+					sub = title;
 					break;
 				default:
-					prefix = "";
+					sub = title;
 					break;
 			};
 			
-			c = new Clickable(prefix + title, curr);
+			c = new Clickable(sub, curr);
 			//c.setBorder(BorderFactory.createLineBorder(Color.black));
 			
 			line.add(c);
@@ -176,10 +175,11 @@ class Console extends JFrame {
 	{
 		/**
 		 * Formats a debug message with a timestamp, and displays it in the 
-		 * message log. Will only print the message if debug mode is enabled.
+		 * message log. Will only print the message if the debugEnabled
+		 * flag is set true
 		 * 
 		 * @param text  The message to be displayed
-		 */
+		 */		
 		if (!debugEnabled) return;
 		for (String s : text.split("\n")) {
 			this.print(">>>", Format.timestamp(), " ", s);

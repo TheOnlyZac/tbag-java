@@ -15,7 +15,11 @@ class Actor extends BaseObject {
 	
 	public void Pickup(Item item)
 	{
-		this.inventory.add(item);
-		item.location(this.inventory.name());
+		/**
+		 * Pickup an item and add it to the Actor's inventory
+		 * 
+		 * @param item 	Item to be picked up
+		 */
+		this.inventory.addObject(item);
 	}
 }

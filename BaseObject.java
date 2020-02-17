@@ -47,11 +47,11 @@ class BaseObject {
 	public BaseObject(String name, String desc, String loc)
 	{
 		/**
-		 * Initialize a new BaseObject with the given name and description
+		 * Initialize a new BaseObject with the given name and description.
 		 * 
 		 * @param name 	The name of the object
 		 * @param desc 	A brief description of the object
-		 * @param 		Where the object is in space
+		 * @param loc	A description of where the object is in space
 		 */
 		this.name = name;
 		this.description = desc;
@@ -78,11 +78,21 @@ class BaseObject {
 	
 	public void AddAction(Action action)
 	{
+		/**
+		 * Add the given action to the list of the Object's possible actions.
+		 * 
+		 * @param action 	The action to be stored in the actions array
+		 */
 		this.actions.put(action.name, action);
 	}
 
 	public String RunAction(String name)
 	{
+		/**
+		 * Run the action stored under the given name in the actions array.
+		 * 
+		 * @param name 	The name of the action to be run
+		 */
 		try {
 			return this.actions.get(name).run();
 		} catch (Exception exception) {

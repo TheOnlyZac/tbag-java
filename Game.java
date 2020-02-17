@@ -6,7 +6,7 @@ import java.util.Random;
 
 class Game {
 	/**
-	 * Main game class, handles user input and logic
+	 * Main game class, handles manipulation of game elements and logic
 	 */
 	
 	public Map<Integer, BaseObject> elements; // maps all objects in the game to unique IDs
@@ -35,14 +35,14 @@ class Game {
 				"a mahogany table", "on the floor");
 
 		lobby.addObject(table);
-		lobby.addObject(debugSword);
+		table.addObject(debugSword);
 		lobby.addObject(debugActor);
 		AddScene(lobby);
 		sceneManager.loadScene(lobby);
 
 		console.printf("%xn says, \"It's dangerous to go alone, take this!\"",
 				debugActor);
-		console.printf("%xn gestures to %tn on the table.'",
+		console.printf("%xn gestures to %tn on the table.",
 				debugActor, debugSword);
 		
 		// OFFICE SCENE
@@ -76,7 +76,7 @@ class Game {
 	private void AddScene(Scene scene)
 	{
 		/**
-		 * 
+		 * Add a scene to the game
 		 */
 		scenes.add(scene);
 	}
@@ -88,7 +88,7 @@ class Game {
 		 * 
 		 * @param obj 	The object to add
 		 */
-		// todo: make sure ID isn't already in hashmap before adding
+		// todo: make sure ID is unique before adding to the map
 		elements.put(genId(), obj);
 	}
 	
@@ -99,15 +99,5 @@ class Game {
 		 */
 		Random r = new Random();
 		return r.nextInt((9999 - 1000) + 1) + 1;
-	}
-	
-
-	private static int parseInput(String text)
-	{
-		// todo: move input parser into Console class
-		String[] words = text.split(" ");
-		if (words[0].equals("exit")) return -1;
-		return 0;
-
 	}
 }

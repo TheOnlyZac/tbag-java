@@ -1,6 +1,10 @@
 import java.util.concurrent.*;
 
 public class Action { // lawsuit
+	/**
+	 * Stores a Callable object which returns a string result representing
+	 * its outcome
+	 */
 	
 	public String name;
 	
@@ -15,6 +19,9 @@ public class Action { // lawsuit
 	
 	public String run()
 	{
+		/**
+		 * Get the result of running this action and return the string output
+		 */		
 		try {
 			return result.get();
 		} catch (Exception exception) {
