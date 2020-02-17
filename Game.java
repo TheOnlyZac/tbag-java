@@ -65,14 +65,14 @@ class Game {
 				"a stack of paperwork", "on the desk", 1);
 		
 		Container desk = new Container("desk",
-				"a simple wooden desk", "on the far side of the room", 50);
+				"a wooden desk", "on the far side of the room", 50);
 		
 		office.addObject(papers);
 		office.addObject(desk);
 		AddScene(office);
 		
-		Portal door = new Portal("door", "an office door",
-				"on the south wall", office);
+		Portal door = new Portal("door",
+				"an office door", "on the south wall", office);
 
 		lobby.addObject(door);
 		sceneManager.loadScene(lobby);

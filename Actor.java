@@ -33,4 +33,11 @@ class Actor extends BaseObject {
 		
 		c.printf("%xn " + String.format(" says \"%s\"", s), blocksFinal);
 	}
+	
+	@Override
+	public void examine(Console c)
+	{
+    	c.printf("That is %xn, %as %xs.",
+    			this, this.description(), this.location());
+	}
 }

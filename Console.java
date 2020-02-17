@@ -6,7 +6,7 @@ class Console extends JFrame {
 	 * The Console handles writing text to the screen.
 	 */
 	
-	public static Boolean debugEnabled = false;
+	public static Boolean debugEnabled = true;
 	
 	private JPanel textPanel;
 
@@ -104,8 +104,6 @@ class Console extends JFrame {
 		line.setAlignmentX(Component.LEFT_ALIGNMENT);
 		//line.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
-		
-		Clickable c; // new clickable to insert into the line
 		int i = 0; // current block counter
 		int j = 0; // loop counter
 		
@@ -130,47 +128,49 @@ class Console extends JFrame {
 				continue;
 			}
 			
+			Clickable c = null; // new clickable to insert into the line
+			
 			String partA = s.substring(0, 2); // part a = substitution
 			String partB = s.substring(2); // part b = the string following
-			String sub; //
-			String title; //
+			String pre;
+			String post;
 			
 			// substitute the title
 			switch(partA.charAt(1)) {
 				case 'n':
-					title = curr.name();
+					post = Format.stripPrefix(curr.name());
+					c = new Clickable(this, post, curr);
 					break;
 				case 'd':
-					title = curr.description();
+					post = Format.stripPrefix(curr.description());
+					c = new Clickable(this, post, curr);
 					break;
 				case 'l':
-					title = curr.location();
+					post = curr.location();
 					break;
+				case 's':
 				default:
-					title = curr.name();
+					post = blocks[i].toString();
 					break;
 			};
 			
 			// substitute the prefix
 			switch(partA.charAt(0)) {
 				case 'a':
-					sub = Format.a(title);
+					pre = Format.a(post, true);
 					break;
 				case 't':
-					sub = Format.the(title);
+					pre = "the ";
 					break;
 				case 'x':
-					sub = title;
-					break;
 				default:
-					sub = title;
+					pre = "";
 					break;
 			};
 			
-			c = new Clickable(this, sub, curr);
-			//c.setBorder(BorderFactory.createLineBorder(Color.black));
-			
-			line.add(c);
+			line.add(new JLabel(pre));
+			if (c != null) line.add(c);
+			else line.add(new JLabel(post));
 			line.add(new JLabel(partB));
 			
 			i++; // increment block counter

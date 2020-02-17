@@ -14,19 +14,34 @@ final class Format {
 		 */		
 		return new SimpleDateFormat("HH:mm:ss").format(new Date());
 	}
+	
+	public static String stripPrefix(String str)
+	{
+		if (str.startsWith("a ")) return str.substring(2);
+		else if (str.startsWith("an ")) return str.substring(3);
+		else if (str.startsWith("the ")) return str.substring(4);
+		else return str;
+	}
 
-	public static String a(String str)
+	public static String a(String str, Boolean justA)
 	{
 		/** 
 		 * Returns "an str" if str starts with a vowel, 
 		 * "a str" if not, and the string as-is if it already starts with a/an
-		 */		
-		String lowerStr = str.toLowerCase();
-		if (lowerStr.startsWith("a ") || lowerStr.startsWith("an "))
-			return str;
+		 * 
+		 * @param str 	String to prefix with a/an
+		 * @param justA Whether to return JUST a/an, or the full string w prefix
+		 */
+		String lowerStr = stripPrefix(str.toLowerCase());
 		
 		Character[] vowels = new Character[]{'a', 'e', 'i', 'o', 'u'};
-		return (Arrays.asList(vowels).contains(str.charAt(0)) ? "an " + str : "a " + str);
+		String aStr = Arrays.asList(vowels).contains(str.charAt(0)) ? "an " : "a ";
+		return justA ? aStr : aStr + str;
+	}
+	
+	public static String a(String str)
+	{
+		return a(str, false);
 	}
 	
 	public static String a(BaseObject obj)

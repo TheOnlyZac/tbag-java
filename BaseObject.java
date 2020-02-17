@@ -60,6 +60,12 @@ class BaseObject {
 	{
 		return String.format("%s", this.name);
 	}
+	
+	public void examine(Console c)
+	{
+    	c.printf("%tn is %as %xs.",
+    			this, this.description(), this.location());
+	}
 
 	/* public void say(String msg)
 	{
